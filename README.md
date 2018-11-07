@@ -1,1 +1,3 @@
-# Sql-Injection-Techniques-
+# Sql-Injection-Techniques
+
+Complete Sql injection techniques
